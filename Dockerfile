@@ -14,4 +14,4 @@ RUN go build -o api-alta-dashboard
 
 EXPOSE 8000
 
-CMD [ "./clean-api" ]
+CMD [ "./api-alta-dashboard" ]
