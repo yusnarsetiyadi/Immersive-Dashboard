@@ -47,9 +47,15 @@ func (repo *userRepository) GetById(id int) (data user.Core, err error) {
 	var user User
 
 	tx := repo.db.First(&user, id)
+
 	if tx.Error != nil {
 		return data, tx.Error
 	}
+
+	if tx.RowsAffected == 0 {
+		return data, errors.New("Data not found.")
+	}
+
 	var dataCore = user.toCore()
 	return dataCore, nil
 }

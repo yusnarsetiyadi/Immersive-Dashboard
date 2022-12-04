@@ -91,6 +91,14 @@ func (service *userService) Update(input user.Core, id int) error {
 		input.Password = string(generate)
 	}
 
+	// validasi user dgn id path param, apakah ada datanya di database
+	_, errFindId := service.userRepository.GetById(id)
+	if errFindId != nil {
+		log.Error(errFindId.Error())
+		return helper.ServiceErrorMsg(errFindId)
+	}
+
+	// proses
 	_, err := service.userRepository.Update(input, id)
 	if err != nil {
 		log.Error(err.Error())
@@ -101,6 +109,14 @@ func (service *userService) Update(input user.Core, id int) error {
 }
 
 func (service *userService) Delete(id int) error {
+	// validasi user dgn id path param, apakah ada datanya di database
+	_, errFindId := service.userRepository.GetById(id)
+	if errFindId != nil {
+		log.Error(errFindId.Error())
+		return helper.ServiceErrorMsg(errFindId)
+	}
+
+	// proses
 	_, err := service.userRepository.Delete(id)
 	if err != nil {
 		log.Error(err.Error())
