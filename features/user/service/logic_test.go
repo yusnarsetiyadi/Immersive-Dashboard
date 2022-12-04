@@ -11,13 +11,13 @@ import (
 
 func TestGetAll(t *testing.T) {
 	repo := new(mocks.UserRepository)
-	returnData := []user.Core{{ID: 1, Name: "alta", Email: "alta@mail.id", Password: "qwerty", Phone: "081234", Address: "Jakarta", Role: "user"}}
+	returnData := []user.Core{{ID: 1, FullName: "alta", Email: "alta@mail.id", Password: "qwerty", Team: "Academic", Status: "Active", Role: "user"}}
 	t.Run("Success Get All data", func(t *testing.T) {
 		repo.On("GetAll").Return(returnData, nil).Once()
 		srv := New(repo)
 		response, err := srv.GetAll()
 		assert.Nil(t, err)
-		assert.Equal(t, returnData[0].Name, response[0].Name)
+		assert.Equal(t, returnData[0].FullName, response[0].FullName)
 		repo.AssertExpectations(t)
 	})
 
@@ -34,8 +34,8 @@ func TestGetAll(t *testing.T) {
 func TestCreate(t *testing.T) {
 	repo := new(mocks.UserRepository)
 	t.Run("Success Create user", func(t *testing.T) {
-		inputRepo := user.Core{Name: "alta", Email: "alta@mail.id", Password: "qwerty", Phone: "081234", Address: "Jakarta", Role: "user"}
-		inputData := user.Core{Name: "alta", Email: "alta@mail.id", Password: "qwerty", Phone: "081234", Address: "Jakarta"}
+		inputRepo := user.Core{ID: 1, FullName: "alta", Email: "alta@mail.id", Password: "qwerty", Team: "Academic", Status: "Active", Role: "user"}
+		inputData := user.Core{ID: 1, FullName: "alta", Email: "alta@mail.id", Password: "qwerty", Team: "Academic", Status: "Active", Role: "user"}
 		repo.On("Create", inputRepo).Return(1, nil).Once()
 		srv := New(repo)
 		err := srv.Create(inputData)
@@ -44,8 +44,8 @@ func TestCreate(t *testing.T) {
 	})
 
 	t.Run("Failed Create user, duplicate entry", func(t *testing.T) {
-		inputRepo := user.Core{Name: "alta", Email: "alta@mail.id", Password: "qwerty", Phone: "081234", Address: "Jakarta", Role: "user"}
-		inputData := user.Core{Name: "alta", Email: "alta@mail.id", Password: "qwerty", Phone: "081234", Address: "Jakarta"}
+		inputRepo := user.Core{ID: 1, FullName: "alta", Email: "alta@mail.id", Password: "qwerty", Team: "Academic", Status: "Active", Role: "user"}
+		inputData := user.Core{ID: 1, FullName: "alta", Email: "alta@mail.id", Password: "qwerty", Team: "Academic", Status: "Active", Role: "user"}
 		repo.On("Create", inputRepo).Return(0, errors.New("failed to insert data, error query")).Once()
 		srv := New(repo)
 		err := srv.Create(inputData)
@@ -61,7 +61,7 @@ func TestCreate(t *testing.T) {
 	*/
 	t.Run("Failed Create user, name empty", func(t *testing.T) {
 		// inputRepo := user.Core{Email: "alta@mail.id", Password: "qwerty", Phone: "081234", Address: "Jakarta", Role: "user"}
-		inputData := user.Core{Email: "alta@mail.id", Password: "qwerty", Phone: "081234", Address: "Jakarta"}
+		inputData := user.Core{ID: 1, FullName: "alta", Email: "alta@mail.id", Password: "qwerty", Team: "Academic", Status: "Active", Role: "user"}
 		// repo.On("Create", inputRepo).Return(0, errors.New("failed to insert data, error query")).Once()
 		srv := New(repo)
 		err := srv.Create(inputData)

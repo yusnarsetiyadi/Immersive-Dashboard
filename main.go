@@ -7,6 +7,7 @@ import (
 	"fmt"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
@@ -17,6 +18,11 @@ func main() {
 	e := echo.New()
 
 	factory.InitFactory(e, db)
+
+	// middleware
+	e.Pre(middleware.RemoveTrailingSlash())
+	e.Use(middleware.CORS())
+	e.Use(middleware.Logger())
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", cfg.SERVER_PORT)))
 }

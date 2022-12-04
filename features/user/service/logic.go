@@ -29,7 +29,7 @@ func (service *userService) Create(input user.Core) (err error) {
 	// 	return errors.New("Name, email, password harus diisi")
 	// }
 
-	input.Role = "user"
+	input.Role = "User"
 	if errValidate := service.validate.Struct(input); errValidate != nil {
 		return errValidate
 	}

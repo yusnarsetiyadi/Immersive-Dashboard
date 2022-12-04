@@ -3,22 +3,22 @@ package delivery
 import "api-alta-dashboard/features/user"
 
 type UserResponse struct {
-	ID      uint   `json:"id"`
-	Name    string `json:"name"`
-	Email   string `json:"email"`
-	Phone   string `json:"phone"`
-	Address string `json:"address"`
-	Role    string `json:"role"`
+	ID       uint   `json:"id"`
+	FullName string `json:"full_name"`
+	Email    string `json:"email"`
+	Team     string `json:"team"`
+	Role     string `json:"role"`
+	Status   string `json:"status"`
 }
 
 func fromCore(dataCore user.Core) UserResponse {
 	return UserResponse{
-		ID:      dataCore.ID,
-		Name:    dataCore.Name,
-		Email:   dataCore.Email,
-		Phone:   dataCore.Phone,
-		Address: dataCore.Address,
-		Role:    dataCore.Role,
+		ID:       dataCore.ID,
+		FullName: dataCore.FullName,
+		Email:    dataCore.Email,
+		Team:     dataCore.Team,
+		Role:     dataCore.Role,
+		Status:   dataCore.Status,
 	}
 }
 
