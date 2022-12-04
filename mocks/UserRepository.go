@@ -55,6 +55,34 @@ func (_m *UserRepository) Delete(id int) (int, error) {
 	return r0, r1
 }
 
+// FindUser provides a mock function with given fields: email
+func (_m *UserRepository) FindUser(email string) (user.Core, int, error) {
+	ret := _m.Called(email)
+
+	var r0 user.Core
+	if rf, ok := ret.Get(0).(func(string) user.Core); ok {
+		r0 = rf(email)
+	} else {
+		r0 = ret.Get(0).(user.Core)
+	}
+
+	var r1 int
+	if rf, ok := ret.Get(1).(func(string) int); ok {
+		r1 = rf(email)
+	} else {
+		r1 = ret.Get(1).(int)
+	}
+
+	var r2 error
+	if rf, ok := ret.Get(2).(func(string) error); ok {
+		r2 = rf(email)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
+}
+
 // GetAll provides a mock function with given fields:
 func (_m *UserRepository) GetAll() ([]user.Core, error) {
 	ret := _m.Called()

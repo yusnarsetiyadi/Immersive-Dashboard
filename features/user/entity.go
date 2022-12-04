@@ -28,4 +28,5 @@ type RepositoryInterface interface {
 	GetById(id int) (data Core, err error)
 	Update(input Core, id int) (row int, err error)
 	Delete(id int) (row int, err error)
+	FindUser(email string) (data Core, row int, err error)
 }
