@@ -34,7 +34,7 @@ func (delivery *UserDelivery) GetAll(c echo.Context) error {
 
 	dataResponse := fromCoreList(results)
 
-	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success read all users", dataResponse))
+	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("Success read all users", dataResponse))
 }
 
 func (delivery *UserDelivery) GetById(c echo.Context) error {
@@ -65,7 +65,7 @@ func (delivery *UserDelivery) Create(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, helper.FailedResponse("Failed insert data. "+err.Error()))
 	}
-	return c.JSON(http.StatusCreated, helper.SuccessResponse("success create data"))
+	return c.JSON(http.StatusCreated, helper.SuccessResponse("Success create data"))
 }
 
 func (delivery *UserDelivery) Update(c echo.Context) error {
@@ -101,5 +101,5 @@ func (delivery *UserDelivery) Delete(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.FailedResponse(err.Error()))
 	}
 
-	return c.JSON(http.StatusOK, helper.SuccessResponse("Success delete user."))
+	return c.JSON(http.StatusOK, helper.SuccessResponse("Success delete data."))
 }

@@ -9,12 +9,12 @@ import (
 //struct gorm model
 type User struct {
 	gorm.Model
-	Name     string
-	Email    string
-	Password string
-	Phone    string `gorm:"type:varchar(15)"`
-	Address  string
-	Role     string
+	FullName string
+	Email    string `validate:"required,email"`
+	Password string `valudate:"required"`
+	Team     string
+	Role     string `valudate:"required"`
+	Status   string
 	// Books    []Book
 }
 
@@ -24,12 +24,12 @@ type User struct {
 //mengubah struct core ke struct model gorm
 func fromCore(dataCore _user.Core) User {
 	userGorm := User{
-		Name:     dataCore.Name,
+		FullName: dataCore.FullName,
 		Email:    dataCore.Email,
 		Password: dataCore.Password,
-		Phone:    dataCore.Phone,
-		Address:  dataCore.Address,
+		Team:     dataCore.Team,
 		Role:     dataCore.Role,
+		Status:   dataCore.Status,
 	}
 	return userGorm
 }
@@ -38,12 +38,12 @@ func fromCore(dataCore _user.Core) User {
 func (dataModel *User) toCore() _user.Core {
 	return _user.Core{
 		ID:        dataModel.ID,
-		Name:      dataModel.Name,
+		FullName:  dataModel.FullName,
 		Email:     dataModel.Email,
 		Password:  dataModel.Password,
-		Phone:     dataModel.Phone,
-		Address:   dataModel.Address,
+		Team:      dataModel.Team,
 		Role:      dataModel.Role,
+		Status:    dataModel.Status,
 		CreatedAt: dataModel.CreatedAt,
 		UpdatedAt: dataModel.UpdatedAt,
 	}

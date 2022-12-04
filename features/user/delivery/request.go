@@ -3,22 +3,22 @@ package delivery
 import "api-alta-dashboard/features/user"
 
 type InsertRequest struct {
-	Name     string `json:"name" form:"name"`
+	FullName string `json:"fullname" form:"fullname"`
 	Email    string `json:"email" form:"email"`
 	Password string `json:"password" form:"password"`
-	Phone    string `json:"phone" form:"phone"`
-	Address  string `json:"address" form:"address"`
+	Team     string `json:"team" form:"team"`
 	Role     string `json:"role" form:"role"`
+	Status   string `json:"status" form:"status"`
 }
 
 type UpdateRequest struct {
 	ID       uint   `json:"id" form:"id"`
-	Name     string `json:"name" form:"name"`
+	FullName string `json:"fullname" form:"fullname"`
 	Email    string `json:"email" form:"email"`
 	Password string `json:"password" form:"password"`
-	Phone    string `json:"phone" form:"phone"`
-	Address  string `json:"address" form:"address"`
+	Team     string `json:"team" form:"team"`
 	Role     string `json:"role" form:"role"`
+	Status   string `json:"status" form:"status"`
 }
 
 func toCore(i interface{}) user.Core {
@@ -26,24 +26,24 @@ func toCore(i interface{}) user.Core {
 	case InsertRequest:
 		cnv := i.(InsertRequest)
 		return user.Core{
-			Name:     cnv.Name,
+			FullName: cnv.FullName,
 			Email:    cnv.Email,
 			Password: cnv.Password,
-			Phone:    cnv.Phone,
-			Address:  cnv.Address,
+			Team:     cnv.Team,
 			Role:     cnv.Role,
+			Status:   cnv.Status,
 		}
 
 	case UpdateRequest:
 		cnv := i.(UpdateRequest)
 		return user.Core{
 			ID:       cnv.ID,
-			Name:     cnv.Name,
+			FullName: cnv.FullName,
 			Email:    cnv.Email,
 			Password: cnv.Password,
-			Phone:    cnv.Phone,
-			Address:  cnv.Address,
+			Team:     cnv.Team,
 			Role:     cnv.Role,
+			Status:   cnv.Status,
 		}
 	}
 

@@ -10,11 +10,11 @@ import (
 type User struct {
 	ID        uint
 	FullName  string
-	Email     string `gorm:"unique"`
-	Password  string
-	Role      string `gorm:"type:enum('default', 'admin');default:'default'"`
-	Status    bool
-	TeamID    uint
+	Email     string `validate:"required,email"`
+	Password  string `valudate:"required"`
+	Team      string
+	Role      string `valudate:"required"`
+	Status    string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt
@@ -24,7 +24,7 @@ type User struct {
 
 func (data User) toCore() auth.Core {
 	return auth.Core{
-		ID:        int(data.ID),
+		ID:        data.ID,
 		FullName:  data.FullName,
 		Email:     data.Email,
 		Password:  data.Password,

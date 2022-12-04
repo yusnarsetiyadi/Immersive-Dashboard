@@ -18,10 +18,11 @@ func TestLogin(t *testing.T) {
 
 		repo.On("FindUser").Return(returnData, nil).Once()
 		srv := New(repo)
-		token, errLogin := srv.Login(inputData)
+		result, token, errLogin := srv.Login(inputData)
 
 		assert.NoError(t, errLogin, "Error is null")
 		assert.NotEmpty(t, token, "Token generated.")
+		assert.NotEmpty(t, result, "Result data.")
 		repo.AssertExpectations(t)
 	})
 
@@ -33,9 +34,9 @@ func TestLogin(t *testing.T) {
 
 		repo.On("FindUser").Return(returnData, errors.New("Failed process query")).Once()
 		srv := New(repo)
-		_, errLogin1 := srv.Login(inputData1)
-		_, errLogin2 := srv.Login(inputData2)
-		_, errLogin3 := srv.Login(inputData3)
+		_, _, errLogin1 := srv.Login(inputData1)
+		_, _, errLogin2 := srv.Login(inputData2)
+		_, _, errLogin3 := srv.Login(inputData3)
 
 		assert.Contains(t, errLogin1, "validate input", "Failed login. Empty Email.")
 		assert.Contains(t, errLogin2, "validate input", "Failed login. Empty Password.")

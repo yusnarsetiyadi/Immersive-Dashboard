@@ -3,17 +3,19 @@ package auth
 import "time"
 
 type Core struct {
-	ID        int
+	ID        uint
 	FullName  string
 	Email     string `validate:"required,email"`
 	Password  string `valudate:"required"`
-	Role      string
+	Team      string
+	Role      string `valudate:"required"`
+	Status    string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
 
 type ServiceInterface interface {
-	Login(input Core) (token string, err error)
+	Login(input Core) (data Core, token string, err error)
 }
 
 type RepositoryInterface interface {
