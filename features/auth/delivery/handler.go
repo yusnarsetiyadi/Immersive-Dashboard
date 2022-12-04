@@ -30,7 +30,7 @@ func (handler *AuthHandler) Login(c echo.Context) error {
 	}
 
 	dataCore := ToCore(userInput)
-	token, err := handler.authService.Login(dataCore)
+	result, token, err := handler.authService.Login(dataCore)
 
 	if err != nil {
 		// return c.JSON(http.StatusInternalServerError, map[string]interface{}{
@@ -43,7 +43,5 @@ func (handler *AuthHandler) Login(c echo.Context) error {
 	// 	"name":    name,
 	// 	"token":   result,
 	// })
-	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("login success", map[string]interface{}{
-		"token": token,
-	}))
+	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("Login Success.", FromCore(result, token)))
 }
