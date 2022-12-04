@@ -21,9 +21,9 @@ func New(service user.ServiceInterface, e *echo.Echo) {
 
 	e.GET("/users", handler.GetAll, middlewares.JWTMiddleware())
 	e.GET("/users/:id", handler.GetById, middlewares.JWTMiddleware())
-	e.POST("/users", handler.Create, middlewares.JWTMiddleware())
+	e.POST("/users", handler.Create, middlewares.JWTMiddleware(), middlewares.IsAdmin)
 	e.PUT("/users/:id", handler.Update, middlewares.JWTMiddleware())
-	e.DELETE("/users/:id", handler.Delete, middlewares.JWTMiddleware())
+	e.DELETE("/users/:id", handler.Delete, middlewares.JWTMiddleware(), middlewares.IsAdmin)
 }
 
 func (delivery *UserDelivery) GetAll(c echo.Context) error {
