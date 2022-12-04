@@ -89,10 +89,6 @@ func (repo *userRepository) FindUser(email string) (result user.Core, rowAffecte
 		return user.Core{}, rowAffected, tx.Error
 	}
 
-	if tx.RowsAffected == 0 {
-		return user.Core{}, rowAffected, errors.New("Email Not Found.")
-	}
-
 	result = userData.toCore()
 
 	return result, rowAffected, nil

@@ -4,6 +4,7 @@ import (
 	"api-alta-dashboard/features/user"
 	"api-alta-dashboard/utils/helper"
 	"errors"
+	"strings"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/gommon/log"
@@ -40,11 +41,14 @@ func (service *userService) Create(input user.Core) (err error) {
 	// validasi email harus unik
 	_, rowAffected, errFindEmail := service.userRepository.FindUser(input.Email)
 
-	if rowAffected >= 0 {
-		// log.Error(errFindEmail.Error())
+	// helper.LogDebug("\n\n\n find email res  ", res)
+	// helper.LogDebug("\n\n\n find email rowAffected  ", rowAffected)
+
+	if rowAffected > 0 {
 		return errors.New("Failed. Email " + input.Email + " already exist. Please pick another email.")
 	}
-	if errFindEmail != nil {
+
+	if errFindEmail != nil && !strings.Contains(errFindEmail.Error(), "found") {
 		return helper.ServiceErrorMsg(errFindEmail)
 	}
 
