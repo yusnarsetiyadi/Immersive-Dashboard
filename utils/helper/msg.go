@@ -2,6 +2,7 @@ package helper
 
 import (
 	"errors"
+	"log"
 	"strings"
 )
 
@@ -13,4 +14,8 @@ func ServiceErrorMsg(errData error) error {
 	} else {
 		return errors.New("Failed. Other Error. Please contact your administrator.")
 	}
+}
+
+func LogDebug(msg ...interface{}) {
+	log.Println(msg)
 }
