@@ -26,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: mfaishal882/clean-api-img:latest
+          tags: mfaishal882/api-alta-dashboard:latest
       - 
         name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
