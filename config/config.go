@@ -39,7 +39,7 @@ func initConfig() *AppConfig {
 
 	if _, exist := os.LookupEnv("SECRET"); !exist {
 		if err := godotenv.Load(".env"); err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 	}
 
