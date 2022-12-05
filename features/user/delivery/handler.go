@@ -31,9 +31,12 @@ func New(service user.ServiceInterface, e *echo.Echo) {
 }
 
 func (delivery *UserDelivery) GetAll(c echo.Context) error {
-	results, err := delivery.userService.GetAll()
+	query := c.QueryParam("name")
+	helper.LogDebug("isi query = ", query)
+	results, err := delivery.userService.GetAll(query)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, helper.FailedResponse("error read data"))
+
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse(err.Error()))
 	}
 
 	dataResponse := fromCoreList(results)

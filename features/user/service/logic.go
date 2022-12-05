@@ -70,8 +70,24 @@ func (service *userService) Create(input user.Core) (err error) {
 }
 
 // GetAll implements user.ServiceInterface
-func (service *userService) GetAll() (data []user.Core, err error) {
-	data, err = service.userRepository.GetAll()
+func (service *userService) GetAll(query string) (data []user.Core, err error) {
+
+	if query == "" {
+		data, err = service.userRepository.GetAll()
+	} else {
+		data, err = service.userRepository.GetAllWithSearch(query)
+	}
+
+	if err != nil {
+		helper.LogDebug(err)
+		return nil, helper.ServiceErrorMsg(err)
+	}
+
+	if len(data) == 0 {
+		helper.LogDebug("Get data success. No data.")
+		return nil, errors.New("Get data success. No data.")
+	}
+
 	return data, err
 }
 
