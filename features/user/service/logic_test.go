@@ -15,7 +15,7 @@ func TestGetAll(t *testing.T) {
 	t.Run("Success Get All data", func(t *testing.T) {
 		repo.On("GetAll").Return(returnData, nil).Once()
 		srv := New(repo)
-		response, err := srv.GetAll()
+		response, err := srv.GetAll("budi")
 		assert.Nil(t, err)
 		assert.Equal(t, returnData[0].FullName, response[0].FullName)
 		repo.AssertExpectations(t)
@@ -24,7 +24,7 @@ func TestGetAll(t *testing.T) {
 	t.Run("Failed Get All data", func(t *testing.T) {
 		repo.On("GetAll").Return(nil, errors.New("failed to get data")).Once()
 		srv := New(repo)
-		response, err := srv.GetAll()
+		response, err := srv.GetAll("budi")
 		assert.NotNil(t, err)
 		assert.Nil(t, response)
 		repo.AssertExpectations(t)
