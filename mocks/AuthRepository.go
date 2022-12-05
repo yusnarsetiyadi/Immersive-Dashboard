@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	user "api-alta-dashboard/features/user"
+	auth "api-alta-dashboard/features/auth"
 
 	mock "github.com/stretchr/testify/mock"
 )
@@ -13,157 +13,20 @@ type AuthRepository struct {
 	mock.Mock
 }
 
-// Create provides a mock function with given fields: input
-func (_m *AuthRepository) Create(input user.Core) (int, error) {
-	ret := _m.Called(input)
-
-	var r0 int
-	if rf, ok := ret.Get(0).(func(user.Core) int); ok {
-		r0 = rf(input)
-	} else {
-		r0 = ret.Get(0).(int)
-	}
-
-	var r1 error
-	if rf, ok := ret.Get(1).(func(user.Core) error); ok {
-		r1 = rf(input)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
-}
-
-// Delete provides a mock function with given fields: id
-func (_m *AuthRepository) Delete(id int) (int, error) {
-	ret := _m.Called(id)
-
-	var r0 int
-	if rf, ok := ret.Get(0).(func(int) int); ok {
-		r0 = rf(id)
-	} else {
-		r0 = ret.Get(0).(int)
-	}
-
-	var r1 error
-	if rf, ok := ret.Get(1).(func(int) error); ok {
-		r1 = rf(id)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
-}
-
 // FindUser provides a mock function with given fields: email
-func (_m *AuthRepository) FindUser(email string) (user.Core, int, error) {
+func (_m *AuthRepository) FindUser(email string) (auth.Core, error) {
 	ret := _m.Called(email)
 
-	var r0 user.Core
-	if rf, ok := ret.Get(0).(func(string) user.Core); ok {
+	var r0 auth.Core
+	if rf, ok := ret.Get(0).(func(string) auth.Core); ok {
 		r0 = rf(email)
 	} else {
-		r0 = ret.Get(0).(user.Core)
-	}
-
-	var r1 int
-	if rf, ok := ret.Get(1).(func(string) int); ok {
-		r1 = rf(email)
-	} else {
-		r1 = ret.Get(1).(int)
-	}
-
-	var r2 error
-	if rf, ok := ret.Get(2).(func(string) error); ok {
-		r2 = rf(email)
-	} else {
-		r2 = ret.Error(2)
-	}
-
-	return r0, r1, r2
-}
-
-// GetAll provides a mock function with given fields:
-func (_m *AuthRepository) GetAll() ([]user.Core, error) {
-	ret := _m.Called()
-
-	var r0 []user.Core
-	if rf, ok := ret.Get(0).(func() []user.Core); ok {
-		r0 = rf()
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]user.Core)
-		}
-	}
-
-	var r1 error
-	if rf, ok := ret.Get(1).(func() error); ok {
-		r1 = rf()
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
-}
-
-// GetAllWithSearch provides a mock function with given fields: query
-func (_m *AuthRepository) GetAllWithSearch(query string) ([]user.Core, error) {
-	ret := _m.Called(query)
-
-	var r0 []user.Core
-	if rf, ok := ret.Get(0).(func(string) []user.Core); ok {
-		r0 = rf(query)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]user.Core)
-		}
+		r0 = ret.Get(0).(auth.Core)
 	}
 
 	var r1 error
 	if rf, ok := ret.Get(1).(func(string) error); ok {
-		r1 = rf(query)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
-}
-
-// GetById provides a mock function with given fields: id
-func (_m *AuthRepository) GetById(id int) (user.Core, error) {
-	ret := _m.Called(id)
-
-	var r0 user.Core
-	if rf, ok := ret.Get(0).(func(int) user.Core); ok {
-		r0 = rf(id)
-	} else {
-		r0 = ret.Get(0).(user.Core)
-	}
-
-	var r1 error
-	if rf, ok := ret.Get(1).(func(int) error); ok {
-		r1 = rf(id)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
-}
-
-// Update provides a mock function with given fields: input, id
-func (_m *AuthRepository) Update(input user.Core, id int) (int, error) {
-	ret := _m.Called(input, id)
-
-	var r0 int
-	if rf, ok := ret.Get(0).(func(user.Core, int) int); ok {
-		r0 = rf(input, id)
-	} else {
-		r0 = ret.Get(0).(int)
-	}
-
-	var r1 error
-	if rf, ok := ret.Get(1).(func(user.Core, int) error); ok {
-		r1 = rf(input, id)
+		r1 = rf(email)
 	} else {
 		r1 = ret.Error(1)
 	}

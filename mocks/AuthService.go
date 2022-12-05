@@ -14,24 +14,31 @@ type AuthService struct {
 }
 
 // Login provides a mock function with given fields: input
-func (_m *AuthService) Login(input auth.Core) (string, error) {
+func (_m *AuthService) Login(input auth.Core) (auth.Core, string, error) {
 	ret := _m.Called(input)
 
-	var r0 string
-	if rf, ok := ret.Get(0).(func(auth.Core) string); ok {
+	var r0 auth.Core
+	if rf, ok := ret.Get(0).(func(auth.Core) auth.Core); ok {
 		r0 = rf(input)
 	} else {
-		r0 = ret.Get(0).(string)
+		r0 = ret.Get(0).(auth.Core)
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(auth.Core) error); ok {
+	var r1 string
+	if rf, ok := ret.Get(1).(func(auth.Core) string); ok {
 		r1 = rf(input)
 	} else {
-		r1 = ret.Error(1)
+		r1 = ret.Get(1).(string)
 	}
 
-	return r0, r1
+	var r2 error
+	if rf, ok := ret.Get(2).(func(auth.Core) error); ok {
+		r2 = rf(input)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
 }
 
 type mockConstructorTestingTNewAuthService interface {
