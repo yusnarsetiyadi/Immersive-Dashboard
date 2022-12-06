@@ -3,6 +3,7 @@ package main
 import (
 	"api-alta-dashboard/config"
 	"api-alta-dashboard/factory"
+	"api-alta-dashboard/middlewares"
 	"api-alta-dashboard/utils/database/mysql"
 	"fmt"
 
@@ -20,6 +21,7 @@ func main() {
 	factory.InitFactory(e, db)
 
 	// middleware
+	middlewares.LogMiddlewares(e)
 	e.Pre(middleware.RemoveTrailingSlash())
 	e.Use(middleware.CORS())
 	e.Use(middleware.Logger())
