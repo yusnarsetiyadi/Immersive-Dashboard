@@ -5,10 +5,6 @@ import (
 )
 
 type InsertRequest struct {
-	FullName          string `json:"full_name" form:"full_name"`
-	Password          string `json:"password" form:"password"`
-	Team              string `json:"team" form:"team"`
-	Role              string `json:"role" form:"role"`
 	Name              string `json:"name" form:"name"`
 	Status            string `json:"status" form:"status"`
 	Gender            string `json:"gender" form:"gender"`
@@ -30,10 +26,6 @@ type InsertRequest struct {
 
 type UpdateRequest struct {
 	ID                uint   `json:"id" form:"id"`
-	FullName          string `json:"full_name" form:"full_name"`
-	Password          string `json:"password" form:"password"`
-	Team              string `json:"team" form:"team"`
-	Role              string `json:"role" form:"role"`
 	Name              string `json:"name" form:"name"`
 	Status            string `json:"status" form:"status"`
 	Gender            string `json:"gender" form:"gender"`
