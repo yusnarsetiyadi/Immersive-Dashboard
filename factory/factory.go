@@ -22,4 +22,5 @@ func InitFactory(e *echo.Echo, db *gorm.DB) {
 	authRepoFactory := authRepo.New(db)
 	authServiceFactory := authService.New(authRepoFactory)
 	authDelivery.New(authServiceFactory, e)
+
 }
