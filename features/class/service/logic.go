@@ -2,6 +2,7 @@ package service
 
 import (
 	"api-alta-dashboard/features/class"
+	"api-alta-dashboard/utils/helper"
 	"errors"
 
 	"github.com/go-playground/validator/v10"
@@ -22,9 +23,9 @@ func New(repo class.RepositoryInterface) class.ServiceInterface {
 // Create implements user.ServiceInterface
 func (service *classService) CreateClass(input class.Core) (err error) {
 	// validate
-	if input.ID == 0 || input.Name == "" || input.UserID == 0 {
-		return errors.New("data harus diisi")
-	}
+	// if input.Name == "" || input.UserID == 0 {
+	// 	return errors.New("data harus diisi")
+	// }
 	_, errCreate := service.classRepository.CreateClass(input)
 	if errCreate != nil {
 		return errCreate
@@ -34,8 +35,23 @@ func (service *classService) CreateClass(input class.Core) (err error) {
 }
 
 // GetAll implements user.ServiceInterface
-func (service *classService) GetAllClass() (data []class.Core, err error) {
-	data, err = service.classRepository.GetAllClass()
+func (service *classService) GetAllClass(query string) (data []class.Core, err error) {
+	if query == "" {
+		data, err = service.classRepository.GetAllClass()
+	} else {
+		data, err = service.classRepository.GetAllWithSearchClass(query)
+	}
+
+	if err != nil {
+		helper.LogDebug(err)
+		return nil, helper.ServiceErrorMsg(err)
+	}
+
+	if len(data) == 0 {
+		helper.LogDebug("Get data success. No data.")
+		return nil, errors.New("Get data success. No data.")
+	}
+
 	return data, err
 }
 
