@@ -17,7 +17,7 @@ func New(db *gorm.DB) class.RepositoryInterface {
 	}
 }
 
-// Create implements user.Repository
+// Create implements class.Repository
 func (repo *classRepository) CreateClass(input class.Core) (row int, err error) {
 	classGorm := fromCore(input)
 	tx := repo.db.Create(&classGorm) // proses insert data
@@ -30,7 +30,7 @@ func (repo *classRepository) CreateClass(input class.Core) (row int, err error) 
 	return int(tx.RowsAffected), nil
 }
 
-// GetAll implements user.Repository
+// GetAll implements class.Repository
 func (repo *classRepository) GetAllClass() (data []class.Core, err error) {
 	var classes []Class
 
@@ -42,7 +42,19 @@ func (repo *classRepository) GetAllClass() (data []class.Core, err error) {
 	return dataCore, nil
 }
 
-// GetById implements user.RepositoryInterface
+// GetAll with search by name implements class.Repository
+func (repo *classRepository) GetAllWithSearchClass(query string) (data []class.Core, err error) {
+	var classes []Class
+
+	tx := repo.db.Where("full_name LIKE ?", "%"+query+"%").Find(&classes)
+	if tx.Error != nil {
+		return nil, tx.Error
+	}
+	var dataCore = toCoreList(classes)
+	return dataCore, nil
+}
+
+// GetById implements class.RepositoryInterface
 func (repo *classRepository) GetByIdClass(id int) (data class.Core, err error) {
 	var class Class
 
@@ -60,7 +72,7 @@ func (repo *classRepository) GetByIdClass(id int) (data class.Core, err error) {
 	return dataCore, nil
 }
 
-// Update implements user.Repository
+// Update implements class.Repository
 func (repo *classRepository) UpdateClass(input class.Core, id int) (row int, err error) {
 	classGorm := fromCore(input)
 	var class Class
@@ -74,7 +86,7 @@ func (repo *classRepository) UpdateClass(input class.Core, id int) (row int, err
 	return int(tx.RowsAffected), nil
 }
 
-// Delete implements user.Repository
+// Delete implements class.Repository
 func (repo *classRepository) DeleteClass(id int) (row int, err error) {
 	var class Class
 	tx := repo.db.Delete(&class, id) // proses delete

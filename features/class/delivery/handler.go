@@ -31,7 +31,9 @@ func New(service class.ServiceInterface, e *echo.Echo) {
 }
 
 func (delivery *ClassDelivery) GetAllClass(c echo.Context) error {
-	results, err := delivery.classService.GetAllClass()
+	query := c.QueryParam("name")
+	helper.LogDebug("isi query = ", query)
+	results, err := delivery.classService.GetAllClass(query)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("error read data"))
 	}
