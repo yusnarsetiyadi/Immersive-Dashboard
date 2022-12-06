@@ -34,7 +34,7 @@ func (repo *classRepository) CreateClass(input class.Core) (row int, err error) 
 func (repo *classRepository) GetAllClass() (data []class.Core, err error) {
 	var classes []Class
 
-	tx := repo.db.Find(&classes)
+	tx := repo.db.Preload("User").Find(&classes)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
@@ -58,7 +58,7 @@ func (repo *classRepository) GetAllWithSearchClass(query string) (data []class.C
 func (repo *classRepository) GetByIdClass(id int) (data class.Core, err error) {
 	var class Class
 
-	tx := repo.db.First(&class, id)
+	tx := repo.db.Preload("User").First(&class, id)
 
 	if tx.Error != nil {
 		return data, tx.Error
