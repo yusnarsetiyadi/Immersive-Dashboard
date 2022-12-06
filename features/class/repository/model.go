@@ -2,6 +2,8 @@ package repository
 
 import (
 	_class "api-alta-dashboard/features/class"
+	"api-alta-dashboard/features/user"
+	_user "api-alta-dashboard/features/user/repository"
 
 	"gorm.io/gorm"
 )
@@ -11,7 +13,7 @@ type Class struct {
 	gorm.Model
 	Name   string
 	UserID uint
-	// User   user.User
+	User   _user.User
 }
 
 // DTO
@@ -29,11 +31,16 @@ func fromCore(dataCore _class.Core) Class {
 // mengubah struct model gorm ke struct core
 func (dataModel *Class) toCore() _class.Core {
 	return _class.Core{
-		ID:        dataModel.ID,
-		Name:      dataModel.Name,
-		UserID:    dataModel.UserID,
-		CreatedAt: dataModel.CreatedAt,
-		UpdatedAt: dataModel.UpdatedAt,
+		ID:     dataModel.ID,
+		Name:   dataModel.Name,
+		UserID: dataModel.UserID,
+		User: user.Core{
+			FullName: dataModel.User.FullName,
+			Email:    dataModel.User.Email,
+			Team:     dataModel.User.Team,
+			Role:     dataModel.User.Role,
+			Status:   dataModel.User.Status,
+		},
 	}
 }
 

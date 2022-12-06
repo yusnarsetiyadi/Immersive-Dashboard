@@ -1,6 +1,7 @@
 package class
 
 import (
+	user "api-alta-dashboard/features/user"
 	"time"
 )
 
@@ -10,7 +11,7 @@ type Core struct {
 	UserID    uint
 	CreatedAt time.Time
 	UpdatedAt time.Time
-	// User      user.Core
+	User      user.Core
 }
 
 type ServiceInterface interface {
