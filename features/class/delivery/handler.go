@@ -2,6 +2,7 @@ package delivery
 
 import (
 	"api-alta-dashboard/features/class"
+	"api-alta-dashboard/middlewares"
 	"api-alta-dashboard/utils/helper"
 	"net/http"
 	"strconv"
@@ -18,11 +19,11 @@ func New(service class.ServiceInterface, e *echo.Echo) {
 		classService: service,
 	}
 
-	e.GET("/class", handler.GetAllClass)        //middlewares.JWTMiddleware()
-	e.GET("/class/:id", handler.GetByIdClass)   //middlewares.JWTMiddleware()
-	e.POST("/class", handler.CreateClass)       //middlewares.JWTMiddleware(), middlewares.IsAdmin
-	e.PUT("/class/:id", handler.UpdateClass)    //middlewares.JWTMiddleware(), middlewares.UserOnlySameId)
-	e.DELETE("/class/:id", handler.DeleteClass) //middlewares.JWTMiddleware(), middlewares.IsAdmin)
+	e.GET("/classes", handler.GetAllClass, middlewares.JWTMiddleware())
+	e.GET("/classes/:id", handler.GetByIdClass, middlewares.JWTMiddleware())
+	e.POST("/classes", handler.CreateClass, middlewares.JWTMiddleware())
+	e.PUT("/classes/:id", handler.UpdateClass, middlewares.JWTMiddleware())
+	e.DELETE("/classes/:id", handler.DeleteClass, middlewares.JWTMiddleware())
 
 	//middlewares.IsAdmin = untuk membatasi akses endpoint hanya admin
 	//middlewares.UserOnlySameId = untuk membatasi akses user mengelola data diri sendiri saja
