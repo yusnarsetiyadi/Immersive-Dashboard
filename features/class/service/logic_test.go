@@ -3,7 +3,6 @@ package service
 // import (
 // 	"api-alta-dashboard/features/class"
 // 	"api-alta-dashboard/mocks"
-// 	"errors"
 // 	"testing"
 
 // 	"github.com/stretchr/testify/assert"
@@ -14,9 +13,9 @@ package service
 // 	returnData := []class.Core{{ID: 1, Name: "be13", UserID: 1}}
 // 	//test for success
 // 	t.Run("success get all class", func(t *testing.T) {
-// 		repo.On("GetAllClass").Return(returnData, nil).Once()
+// 		repo.On("GetAllClass", "").Return(returnData, nil).Once()
 // 		srv := New(repo)
-// 		response, err := srv.GetAllClass()
+// 		response, err := srv.GetAllClass("")
 // 		assert.Nil(t, err)
 // 		assert.Equal(t, returnData[0].Name, response[0].Name)
 // 		repo.AssertExpectations(t)

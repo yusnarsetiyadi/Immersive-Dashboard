@@ -16,6 +16,7 @@ type Core struct {
 
 type ServiceInterface interface {
 	GetAllClass(query string) (data []Core, err error)
+	// GetAllWithSearchClass(query string) (data []Core, err error)
 	CreateClass(input Core) error
 	GetByIdClass(id int) (data Core, err error)
 	UpdateClass(input Core, id int) error
