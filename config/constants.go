@@ -2,6 +2,9 @@ package config
 
 //const SECRET_JWT = "S3CR3T"
 var menteeStatus = [...]string{
+	"None",
+	"Active",
+	"Non-Active",
 	"Interview",
 	"Join Class",
 	"Unit 1",
@@ -27,7 +30,7 @@ var menteeEducationType = [...]string{
 	"Non-Informatic",
 }
 
-var menteeGener = [...]string{
+var menteeGender = [...]string{
 	"Male",
 	"Female",
 }
@@ -36,6 +39,9 @@ var userTeam = [...]string{
 	"Academic",
 	"People",
 	"Placement",
+	"Admission",
+	"Placement",
+	"Mentor",
 }
 
 var userRole = [...]string{
