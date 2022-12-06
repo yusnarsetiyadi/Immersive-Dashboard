@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"api-alta-dashboard/config"
+	mentee "api-alta-dashboard/features/mentee/repository"
 	user "api-alta-dashboard/features/user/repository"
 	"fmt"
 	"log"
@@ -24,4 +25,5 @@ func InitDB(cfg *config.AppConfig) *gorm.DB {
 
 func migrateDB(db *gorm.DB) {
 	db.AutoMigrate(&user.User{})
+	db.AutoMigrate(&mentee.Mentee{})
 }
