@@ -23,7 +23,7 @@ type MenteeResponse struct {
 	EducationMajor    string `json:"education_major"`
 	EducationGraduate string `json:"education_graduate"`
 	ClassName         string `json:"class_name"`
-	IDClass           uint   `json:"id_class"`
+	ClassID           uint   `json:"class_id"`
 }
 
 type MenteeListResponse struct {
@@ -33,7 +33,7 @@ type MenteeListResponse struct {
 	Status        string `json:"status"`
 	Gender        string `json:"gender"`
 	EducationType string `json:"education_type"`
-	IDClass       uint   `json:"id_class"`
+	ClassID       uint   `json:"class_id"`
 }
 
 func toResponseMentee(dataCore mentee.Core) MenteeResponse {
@@ -56,7 +56,7 @@ func toResponseMentee(dataCore mentee.Core) MenteeResponse {
 		EducationMajor:    dataCore.EducationMajor,
 		EducationGraduate: dataCore.EducationGraduate,
 		ClassName:         "Get Class name",
-		IDClass:           dataCore.IDClass,
+		ClassID:           dataCore.ClassID,
 	}
 }
 
@@ -68,7 +68,7 @@ func toResponseMenteeList(dataCore mentee.Core) MenteeListResponse {
 		Status:        dataCore.Status,
 		Gender:        dataCore.Gender,
 		EducationType: dataCore.EducationType,
-		IDClass:       dataCore.IDClass,
+		ClassID:       dataCore.ClassID,
 	}
 }
 

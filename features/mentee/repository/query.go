@@ -41,10 +41,10 @@ func (repo *menteeRepository) GetAll(queryStatus, queryIdClass, queryEdType stri
 	}
 	intIdClass, errConv := strconv.Atoi(queryIdClass)
 	if errConv != nil {
-		return nil, errors.New("Error conver id class to filter.")
+		return nil, errors.New("Error conver class id to filter.")
 	}
 
-	tx := repo.db.Where(&Mentee{Status: queryStatus, IDClass: uint(intIdClass), EducationType: queryEdType}).Find(&mentees)
+	tx := repo.db.Where(&Mentee{Status: queryStatus, ClassID: uint(intIdClass), EducationType: queryEdType}).Find(&mentees)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
@@ -66,11 +66,11 @@ func (repo *menteeRepository) GetAllWithSearch(queryName, queryStatus, queryIdCl
 	}
 	intIdClass, errConv := strconv.Atoi(queryIdClass)
 	if errConv != nil {
-		return nil, errors.New("Error conver id class to filter.")
+		return nil, errors.New("Error conver class id to filter.")
 	}
 
 	tx := repo.db.Where("name LIKE ?", "%"+queryName+"%")
-	tx = repo.db.Where(&Mentee{Status: queryStatus, IDClass: uint(intIdClass), EducationType: queryEdType}).Find(&mentees)
+	tx = repo.db.Where(&Mentee{Status: queryStatus, ClassID: uint(intIdClass), EducationType: queryEdType}).Find(&mentees)
 	// tx = repo.db.Where("name LIKE ?", "%"+queryName+"%").Find(&mentees)
 	// tx := repo.db.Where("name LIKE ?", "%"+queryName+"%")
 	// tx = repo.db.Where("status = ?", queryStatus)
