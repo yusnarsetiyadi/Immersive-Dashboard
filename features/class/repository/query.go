@@ -18,16 +18,16 @@ func New(db *gorm.DB) class.RepositoryInterface {
 }
 
 // Create implements class.Repository
-func (repo *classRepository) CreateClass(input class.Core) (row int, err error) {
+func (repo *classRepository) CreateClass(input class.Core) error {
 	classGorm := fromCore(input)
 	tx := repo.db.Create(&classGorm) // proses insert data
 	if tx.Error != nil {
-		return -1, tx.Error
+		return tx.Error
 	}
 	if tx.RowsAffected == 0 {
-		return 0, errors.New("create failed")
+		return errors.New("create failed")
 	}
-	return int(tx.RowsAffected), nil
+	return nil
 }
 
 // GetAll implements class.Repository
@@ -46,7 +46,7 @@ func (repo *classRepository) GetAllClass() (data []class.Core, err error) {
 func (repo *classRepository) GetAllWithSearchClass(query string) (data []class.Core, err error) {
 	var classes []Class
 
-	tx := repo.db.Where("full_name LIKE ?", "%"+query+"%").Find(&classes)
+	tx := repo.db.Where("name LIKE ?", "%"+query+"%").Find(&classes)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
@@ -73,28 +73,28 @@ func (repo *classRepository) GetByIdClass(id int) (data class.Core, err error) {
 }
 
 // Update implements class.Repository
-func (repo *classRepository) UpdateClass(input class.Core, id int) (row int, err error) {
+func (repo *classRepository) UpdateClass(input class.Core, id int) error {
 	classGorm := fromCore(input)
 	var class Class
 	tx := repo.db.Model(&class).Where("ID = ?", id).Updates(&classGorm) // proses update
 	if tx.Error != nil {
-		return -1, tx.Error
+		return tx.Error
 	}
 	if tx.RowsAffected == 0 {
-		return 0, errors.New("update failed")
+		return errors.New("update failed")
 	}
-	return int(tx.RowsAffected), nil
+	return nil
 }
 
 // Delete implements class.Repository
-func (repo *classRepository) DeleteClass(id int) (row int, err error) {
+func (repo *classRepository) DeleteClass(id int) error {
 	var class Class
 	tx := repo.db.Delete(&class, id) // proses delete
 	if tx.Error != nil {
-		return -1, tx.Error
+		return tx.Error
 	}
 	if tx.RowsAffected == 0 {
-		return 0, errors.New("delete failed")
+		return errors.New("delete failed")
 	}
-	return int(tx.RowsAffected), nil
+	return nil
 }
