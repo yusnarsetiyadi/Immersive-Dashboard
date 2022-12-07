@@ -20,7 +20,7 @@ type Core struct {
 	EducationType     string `validate:"required"`
 	EducationMajor    string
 	EducationGraduate string
-	IDClass           uint `validate:"required"`
+	ClassID           uint `validate:"required"`
 	CreatedAt         time.Time
 	UpdatedAt         time.Time
 }

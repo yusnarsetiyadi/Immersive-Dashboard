@@ -32,7 +32,7 @@ func New(service mentee.ServiceInterface, e *echo.Echo) {
 
 func (delivery *MenteeDelivery) GetAll(c echo.Context) error {
 	queryName := c.QueryParam("name")
-	queryIdClass := c.QueryParam("id_class")
+	queryIdClass := c.QueryParam("class_id")
 	queryStatus := c.QueryParam("status")
 	queryEducationType := c.QueryParam("education_type")
 

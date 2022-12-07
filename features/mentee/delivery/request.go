@@ -21,7 +21,7 @@ type InsertRequest struct {
 	EducationType     string `json:"education_type" form:"education_type"`
 	EducationMajor    string `json:"education_major" form:"education_major"`
 	EducationGraduate string `json:"education_graduate" form:"education_major"`
-	IDClass           uint   `json:"id_class" form:"id_class"`
+	ClassID           uint   `json:"class_id" form:"class_id"`
 }
 
 type UpdateRequest struct {
@@ -42,7 +42,7 @@ type UpdateRequest struct {
 	EducationType     string `json:"education_type" form:"education_type"`
 	EducationMajor    string `json:"education_major" form:"education_major"`
 	EducationGraduate string `json:"education_graduate" form:"education_major"`
-	IDClass           uint   `json:"id_class" form:"id_class"`
+	ClassID           uint   `json:"class_id" form:"class_id"`
 }
 
 func toCore(i interface{}) mentee.Core {
@@ -66,7 +66,7 @@ func toCore(i interface{}) mentee.Core {
 			EducationType:     cnv.EducationType,
 			EducationMajor:    cnv.EducationMajor,
 			EducationGraduate: cnv.EducationGraduate,
-			IDClass:           cnv.IDClass,
+			ClassID:           cnv.ClassID,
 		}
 
 	case UpdateRequest:
@@ -89,7 +89,7 @@ func toCore(i interface{}) mentee.Core {
 			EducationType:     cnv.EducationType,
 			EducationMajor:    cnv.EducationMajor,
 			EducationGraduate: cnv.EducationGraduate,
-			IDClass:           cnv.IDClass,
+			ClassID:           cnv.ClassID,
 		}
 	}
 

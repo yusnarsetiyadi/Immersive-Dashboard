@@ -26,7 +26,7 @@ type Mentee struct {
 	EducationType     string `validate:"required"`
 	EducationMajor    string
 	EducationGraduate string
-	IDClass           uint `validate:"required"`
+	ClassID           uint `validate:"required"`
 }
 
 // DTO
@@ -51,7 +51,7 @@ func fromCore(dataCore _mentee.Core) Mentee {
 		EducationType:     dataCore.EducationType,
 		EducationMajor:    dataCore.EducationMajor,
 		EducationGraduate: dataCore.EducationGraduate,
-		IDClass:           dataCore.IDClass,
+		ClassID:           dataCore.ClassID,
 	}
 	return menteeGorm
 }
@@ -76,7 +76,7 @@ func (dataModel *Mentee) toCore() _mentee.Core {
 		EducationType:     dataModel.EducationType,
 		EducationMajor:    dataModel.EducationMajor,
 		EducationGraduate: dataModel.EducationGraduate,
-		IDClass:           dataModel.IDClass,
+		ClassID:           dataModel.ClassID,
 		CreatedAt:         dataModel.CreatedAt,
 		UpdatedAt:         dataModel.UpdatedAt,
 	}
