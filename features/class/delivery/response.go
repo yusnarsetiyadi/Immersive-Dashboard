@@ -2,19 +2,20 @@ package delivery
 
 import (
 	"api-alta-dashboard/features/class"
+	"api-alta-dashboard/features/user"
 )
 
 type ClassResponse struct {
-	ID     uint   `json:"id"`
-	Name   string `json:"name"`
-	UserID uint   `json:"user_id"`
+	ID   uint   `json:"id"`
+	Name string `json:"name"`
+	User user.Core
 }
 
 func fromCore(dataCore class.Core) ClassResponse {
 	return ClassResponse{
-		ID:     dataCore.ID,
-		Name:   dataCore.Name,
-		UserID: dataCore.UserID,
+		ID:   dataCore.ID,
+		Name: dataCore.Name,
+		User: dataCore.User,
 	}
 }
 
