@@ -17,6 +17,10 @@ import (
 	menteeRepo "api-alta-dashboard/features/mentee/repository"
 	menteeService "api-alta-dashboard/features/mentee/service"
 
+	logDelivery "api-alta-dashboard/features/log/delivery"
+	logRepo "api-alta-dashboard/features/log/repository"
+	logService "api-alta-dashboard/features/log/service"
+
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 )
@@ -38,5 +42,9 @@ func InitFactory(e *echo.Echo, db *gorm.DB) {
 	menteeRepoFactory := menteeRepo.New(db)
 	menteeServiceFactory := menteeService.New(menteeRepoFactory)
 	menteeDelivery.New(menteeServiceFactory, e)
+
+	logRepoFactory := logRepo.New(db)
+	logServiceFactory := logService.New(logRepoFactory)
+	logDelivery.New(logServiceFactory, e)
 
 }

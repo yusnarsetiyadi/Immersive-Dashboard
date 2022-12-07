@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-//struct gorm model
+// struct gorm model
 type Mentee struct {
 	gorm.Model
 	ID                uint
@@ -32,7 +32,7 @@ type Mentee struct {
 // DTO
 // mapping
 
-//mengubah struct core ke struct model gorm
+// mengubah struct core ke struct model gorm
 func fromCore(dataCore _mentee.Core) Mentee {
 	menteeGorm := Mentee{
 		Name:              dataCore.Name,
@@ -56,7 +56,7 @@ func fromCore(dataCore _mentee.Core) Mentee {
 	return menteeGorm
 }
 
-//mengubah struct model gorm ke struct core
+// mengubah struct model gorm ke struct core
 func (dataModel *Mentee) toCore() _mentee.Core {
 	return _mentee.Core{
 		ID:                dataModel.ID,
@@ -82,7 +82,7 @@ func (dataModel *Mentee) toCore() _mentee.Core {
 	}
 }
 
-//mengubah slice struct model gorm ke slice struct core
+// mengubah slice struct model gorm ke slice struct core
 func toCoreList(dataModel []Mentee) []_mentee.Core {
 	var dataCore []_mentee.Core
 	for _, v := range dataModel {

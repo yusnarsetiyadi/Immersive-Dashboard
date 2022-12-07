@@ -14,45 +14,31 @@ type ClassRepository struct {
 }
 
 // CreateClass provides a mock function with given fields: input
-func (_m *ClassRepository) CreateClass(input class.Core) (int, error) {
+func (_m *ClassRepository) CreateClass(input class.Core) error {
 	ret := _m.Called(input)
 
-	var r0 int
-	if rf, ok := ret.Get(0).(func(class.Core) int); ok {
+	var r0 error
+	if rf, ok := ret.Get(0).(func(class.Core) error); ok {
 		r0 = rf(input)
 	} else {
-		r0 = ret.Get(0).(int)
+		r0 = ret.Error(0)
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(class.Core) error); ok {
-		r1 = rf(input)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
 // DeleteClass provides a mock function with given fields: id
-func (_m *ClassRepository) DeleteClass(id int) (int, error) {
+func (_m *ClassRepository) DeleteClass(id int) error {
 	ret := _m.Called(id)
 
-	var r0 int
-	if rf, ok := ret.Get(0).(func(int) int); ok {
+	var r0 error
+	if rf, ok := ret.Get(0).(func(int) error); ok {
 		r0 = rf(id)
 	} else {
-		r0 = ret.Get(0).(int)
+		r0 = ret.Error(0)
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(int) error); ok {
-		r1 = rf(id)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
 // GetAllClass provides a mock function with given fields:
@@ -123,24 +109,17 @@ func (_m *ClassRepository) GetByIdClass(id int) (class.Core, error) {
 }
 
 // UpdateClass provides a mock function with given fields: input, id
-func (_m *ClassRepository) UpdateClass(input class.Core, id int) (int, error) {
+func (_m *ClassRepository) UpdateClass(input class.Core, id int) error {
 	ret := _m.Called(input, id)
 
-	var r0 int
-	if rf, ok := ret.Get(0).(func(class.Core, int) int); ok {
+	var r0 error
+	if rf, ok := ret.Get(0).(func(class.Core, int) error); ok {
 		r0 = rf(input, id)
 	} else {
-		r0 = ret.Get(0).(int)
+		r0 = ret.Error(0)
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(class.Core, int) error); ok {
-		r1 = rf(input, id)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
 type mockConstructorTestingTNewClassRepository interface {
