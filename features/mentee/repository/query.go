@@ -99,6 +99,7 @@ func (repo *menteeRepository) GetById(id int) (data mentee.Core, err error) {
 		return data, errors.New("Data not found.")
 	}
 	fmt.Println("\n\n\n data mentee", mentee)
+
 	var dataCore = mentee.toCore()
 	return dataCore, nil
 }

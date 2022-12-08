@@ -60,6 +60,16 @@ func fromCore(dataCore _mentee.Core) Mentee {
 
 // mengubah struct model gorm ke struct core
 func (dataModel *Mentee) toCore() _mentee.Core {
+
+	var arrLogs []_mentee.LogCore
+	for _, val := range dataModel.Logs {
+		arrLogs = append(arrLogs, _mentee.LogCore{
+			ID:       val.ID,
+			Title:    val.Title,
+			Feedback: val.Feedback,
+			Status:   val.Status,
+		})
+	}
 	return _mentee.Core{
 		ID:                dataModel.ID,
 		Name:              dataModel.Name,
@@ -81,6 +91,7 @@ func (dataModel *Mentee) toCore() _mentee.Core {
 		ClassID:           dataModel.ClassID,
 		CreatedAt:         dataModel.CreatedAt,
 		UpdatedAt:         dataModel.UpdatedAt,
+		Logs:              arrLogs,
 	}
 }
 

@@ -4,6 +4,7 @@ import (
 	"api-alta-dashboard/features/mentee"
 	"api-alta-dashboard/middlewares"
 	"api-alta-dashboard/utils/helper"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -63,6 +64,8 @@ func (delivery *MenteeDelivery) GetById(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, helper.FailedResponse(err.Error()))
 	}
+
+	fmt.Println("ini mentee by id : \n\n", results)
 
 	dataResponse := toResponseMentee(results)
 

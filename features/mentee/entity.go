@@ -34,6 +34,7 @@ type LogCore struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	User      UserCore
+	Mentee    Core
 }
 
 type UserCore struct {

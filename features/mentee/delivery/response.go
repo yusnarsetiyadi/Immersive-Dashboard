@@ -2,28 +2,46 @@ package delivery
 
 import (
 	"api-alta-dashboard/features/mentee"
+	"time"
 )
 
 type MenteeResponse struct {
-	ID                uint   `json:"id"`
-	Name              string `json:"name"`
-	Status            string `json:"status"`
-	Gender            string `json:"gender"`
-	Nickname          string `json:"nickname"`
-	Address           string `json:"address"`
-	HomeAddress       string `json:"home_address"`
-	Email             string `json:"email"`
-	Telegram          string `json:"telegram"`
-	Discord           string `json:"discord"`
-	Phone             string `json:"phone"`
-	EmergencyName     string `json:"emergency_name"`
-	EmergencyPhone    string `json:"emergency_phone"`
-	EmergencyStatus   string `json:"emergency_status"`
-	EducationType     string `json:"education_type"`
-	EducationMajor    string `json:"education_major"`
-	EducationGraduate string `json:"education_graduate"`
-	ClassName         string `json:"class_name"`
-	ClassID           uint   `json:"class_id"`
+	ID                uint          `json:"id"`
+	Name              string        `json:"name"`
+	Status            string        `json:"status"`
+	Gender            string        `json:"gender"`
+	Nickname          string        `json:"nickname"`
+	Address           string        `json:"address"`
+	HomeAddress       string        `json:"home_address"`
+	Email             string        `json:"email"`
+	Telegram          string        `json:"telegram"`
+	Discord           string        `json:"discord"`
+	Phone             string        `json:"phone"`
+	EmergencyName     string        `json:"emergency_name"`
+	EmergencyPhone    string        `json:"emergency_phone"`
+	EmergencyStatus   string        `json:"emergency_status"`
+	EducationType     string        `json:"education_type"`
+	EducationMajor    string        `json:"education_major"`
+	EducationGraduate string        `json:"education_graduate"`
+	ClassName         string        `json:"class_name"`
+	ClassID           uint          `json:"class_id"`
+	Logs              []LogResponse `json:"logs"`
+}
+
+type LogResponse struct {
+	ID           uint   `json:"id"`
+	Title        string `json:"title"`
+	FullNameUser string `json:"fullname_user"`
+	CreatedDate  string `json:"created_date"`
+	Feedback     string `json:"feedback"`
+	Status       string `json:"status"`
+	MenteeID     uint   `json:"mentee_id"`
+	UserID       uint   `json:"user_id"`
+}
+
+type UserResponse struct {
+	ID       uint   `json:"id"`
+	FullName string `json:"full_name"`
 }
 
 type MenteeListResponse struct {
@@ -37,6 +55,22 @@ type MenteeListResponse struct {
 }
 
 func toResponseMentee(dataCore mentee.Core) MenteeResponse {
+
+	var ArrLogs []LogResponse
+
+	for _, val := range dataCore.Logs {
+		ArrLogs = append(ArrLogs, LogResponse{
+			ID:           val.ID,
+			Title:        val.Title,
+			FullNameUser: val.User.FullName,
+			CreatedDate:  val.CreatedAt.Format(time.RFC822),
+			Feedback:     val.Feedback,
+			Status:       val.Status,
+			MenteeID:     dataCore.ID,
+			UserID:       val.User.ID,
+		})
+	}
+
 	return MenteeResponse{
 		ID:                dataCore.ID,
 		Name:              dataCore.Name,
@@ -57,6 +91,7 @@ func toResponseMentee(dataCore mentee.Core) MenteeResponse {
 		EducationGraduate: dataCore.EducationGraduate,
 		ClassName:         "Get Class name",
 		ClassID:           dataCore.ClassID,
+		Logs:              ArrLogs,
 	}
 }
 
