@@ -83,10 +83,10 @@ func (service *userService) GetAll(query string) (data []user.Core, err error) {
 		return nil, helper.ServiceErrorMsg(err)
 	}
 
-	if len(data) == 0 {
-		helper.LogDebug("Get data success. No data.")
-		return nil, errors.New("Get data success. No data.")
-	}
+	// if len(data) == 0 {
+	// 	helper.LogDebug("Get data success. No data.")
+	// 	return nil, errors.New("Get data success. No data.")
+	// }
 
 	return data, err
 }

@@ -1,6 +1,9 @@
 package mentee
 
-import "time"
+import (
+	_class "api-alta-dashboard/features/class"
+	"time"
+)
 
 type Core struct {
 	ID                uint
@@ -22,6 +25,7 @@ type Core struct {
 	EducationGraduate string
 	ClassID           uint `validate:"required"`
 	Logs              []LogCore
+	Class             _class.Core
 	CreatedAt         time.Time
 	UpdatedAt         time.Time
 }

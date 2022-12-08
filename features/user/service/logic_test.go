@@ -63,14 +63,14 @@ import (
 // 		repo.AssertExpectations(t)
 // 	})
 
-// t.Run("Failed delete class", func(t *testing.T) {
-// 	repo.On("DeleteClass", 1).Return(errors.New("failed")).Once()
-// 	srv := New(repo)
-// 	err := srv.DeleteClass(1)
-// 	assert.NotNil(t, err)
-// 	assert.Equal(t, "failed", err.Error())
-// 	repo.AssertExpectations(t)
-// })
+// 	t.Run("Failed delete class", func(t *testing.T) {
+// 		repo.On("DeleteClass", 1).Return(errors.New("failed")).Once()
+// 		srv := New(repo)
+// 		err := srv.Delete(1)
+// 		assert.NotNil(t, err)
+// 		assert.Equal(t, "failed", err.Error())
+// 		repo.AssertExpectations(t)
+// 	})
 // }
 
 func TestGetAll(t *testing.T) {
