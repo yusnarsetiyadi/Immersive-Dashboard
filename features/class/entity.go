@@ -14,6 +14,23 @@ type Core struct {
 	User      user.Core
 }
 
+type Validator struct {
+	ID        uint
+	ClassName string `validate:"required,unique"`
+	UserID    uint
+	CreatedAt time.Time
+	UpdatedAt time.Time
+}
+
+// mengubah struct model gorm ke struct core
+func ToValidator(input Core) Validator {
+	return Validator{
+		ID:        input.ID,
+		ClassName: input.ClassName,
+		UserID:    input.UserID,
+	}
+}
+
 type ServiceInterface interface {
 	GetAllClass(query string) (data []Core, err error)
 	CreateClass(input Core) error
