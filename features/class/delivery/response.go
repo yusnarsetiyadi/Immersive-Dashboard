@@ -6,16 +6,16 @@ import (
 )
 
 type ClassResponse struct {
-	ID   uint   `json:"id"`
-	Name string `json:"name"`
-	User user.Core
+	ID        uint   `json:"id"`
+	ClassName string `json:"class_name"`
+	User      user.Core
 }
 
 func fromCore(dataCore class.Core) ClassResponse {
 	return ClassResponse{
-		ID:   dataCore.ID,
-		Name: dataCore.Name,
-		User: dataCore.User,
+		ID:        dataCore.ID,
+		ClassName: dataCore.ClassName,
+		User:      dataCore.User,
 	}
 }
 

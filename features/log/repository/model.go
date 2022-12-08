@@ -2,7 +2,6 @@ package repository
 
 import (
 	_log "api-alta-dashboard/features/log"
-	"api-alta-dashboard/features/mentee"
 	_mentee "api-alta-dashboard/features/mentee/repository"
 	"api-alta-dashboard/features/user"
 	_user "api-alta-dashboard/features/user/repository"
@@ -44,6 +43,7 @@ func (dataModel *Log) toCore() _log.Core {
 		Title:    dataModel.Title,
 		Feedback: dataModel.Feedback,
 		Status:   dataModel.Status,
+		MenteeID: dataModel.MenteeID,
 		UserID:   dataModel.UserID,
 		User: user.Core{
 			FullName: dataModel.User.FullName,
@@ -51,14 +51,6 @@ func (dataModel *Log) toCore() _log.Core {
 			Team:     dataModel.User.Team,
 			Role:     dataModel.User.Role,
 			Status:   dataModel.User.Status,
-		},
-		MenteeID: dataModel.MenteeID,
-		Mentee: mentee.Core{
-			Name:   dataModel.Mentee.Name,
-			Status: dataModel.Mentee.Status,
-			Gender: dataModel.Mentee.Gender,
-			Email:  dataModel.Mentee.Email,
-			Phone:  dataModel.Mentee.Phone,
 		},
 	}
 }

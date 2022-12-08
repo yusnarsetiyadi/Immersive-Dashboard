@@ -11,9 +11,9 @@ import (
 // struct gorm model
 type Class struct {
 	gorm.Model
-	Name   string
-	UserID uint
-	User   _user.User
+	ClassName string
+	UserID    uint
+	User      _user.User
 }
 
 // DTO
@@ -22,8 +22,8 @@ type Class struct {
 // mengubah struct core ke struct model gorm
 func fromCore(dataCore _class.Core) Class {
 	classGorm := Class{
-		Name:   dataCore.Name,
-		UserID: dataCore.UserID,
+		ClassName: dataCore.ClassName,
+		UserID:    dataCore.UserID,
 	}
 	return classGorm
 }
@@ -31,9 +31,9 @@ func fromCore(dataCore _class.Core) Class {
 // mengubah struct model gorm ke struct core
 func (dataModel *Class) toCore() _class.Core {
 	return _class.Core{
-		ID:     dataModel.ID,
-		Name:   dataModel.Name,
-		UserID: dataModel.UserID,
+		ID:        dataModel.ID,
+		ClassName: dataModel.ClassName,
+		UserID:    dataModel.UserID,
 		User: user.Core{
 			FullName: dataModel.User.FullName,
 			Email:    dataModel.User.Email,
