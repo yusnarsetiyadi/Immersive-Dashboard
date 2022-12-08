@@ -28,7 +28,7 @@ func (repo *menteeRepository) Create(input mentee.Core) (row int, err error) {
 		return -1, tx.Error
 	}
 	if tx.RowsAffected == 0 {
-		return 0, errors.New("Insert failed.")
+		return 0, errors.New("insert failed")
 	}
 	return int(tx.RowsAffected), nil
 }
@@ -42,10 +42,10 @@ func (repo *menteeRepository) GetAll(queryStatus, queryIdClass, queryEdType stri
 	}
 	intIdClass, errConv := strconv.Atoi(queryIdClass)
 	if errConv != nil {
-		return nil, errors.New("Error conver class id to filter.")
+		return nil, errors.New("error conver class id to filter")
 	}
 
-	tx := repo.db.Where(&Mentee{Status: queryStatus, ClassID: uint(intIdClass), EducationType: queryEdType}).Find(&mentees)
+	tx := repo.db.Where(&Mentee{Status: queryStatus, ClassID: uint(intIdClass), EducationType: queryEdType}).Preload("Class").Find(&mentees)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
@@ -67,7 +67,7 @@ func (repo *menteeRepository) GetAllWithSearch(queryName, queryStatus, queryIdCl
 	}
 	intIdClass, errConv := strconv.Atoi(queryIdClass)
 	if errConv != nil {
-		return nil, errors.New("Error conver class id to filter.")
+		return nil, errors.New("error conver class id to filter")
 	}
 
 	tx := repo.db.Where("name LIKE ?", "%"+queryName+"%")
@@ -96,7 +96,7 @@ func (repo *menteeRepository) GetById(id int) (data mentee.Core, err error) {
 	}
 
 	if tx.RowsAffected == 0 {
-		return data, errors.New("Data not found.")
+		return data, errors.New("data not found")
 	}
 	fmt.Println("\n\n\n data mentee", mentee)
 

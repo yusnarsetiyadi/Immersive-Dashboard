@@ -1,6 +1,8 @@
 package repository
 
 import (
+	_class2 "api-alta-dashboard/features/class"
+	_class "api-alta-dashboard/features/class/repository"
 	_log "api-alta-dashboard/features/log/repository"
 	_mentee "api-alta-dashboard/features/mentee"
 
@@ -29,6 +31,7 @@ type Mentee struct {
 	EducationGraduate string
 	ClassID           uint `validate:"required"`
 	Logs              []_log.Log
+	Class             _class.Class
 }
 
 // DTO
@@ -92,6 +95,9 @@ func (dataModel *Mentee) toCore() _mentee.Core {
 		CreatedAt:         dataModel.CreatedAt,
 		UpdatedAt:         dataModel.UpdatedAt,
 		Logs:              arrLogs,
+		Class: _class2.Core{
+			ClassName: dataModel.Class.ClassName,
+		},
 	}
 }
 
