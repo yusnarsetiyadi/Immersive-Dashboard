@@ -5,14 +5,14 @@ import (
 )
 
 type CreateClassRequest struct {
-	Name   string `json:"name" form:"name"`
-	UserID uint   `json:"user_id" form:"user_id"`
+	ClassName string `json:"class_name" form:"class_name"`
+	UserID    uint   `json:"user_id" form:"user_id"`
 }
 
 type UpdateClassRequest struct {
-	ID     uint   `json:"id" form:"id"`
-	Name   string `json:"name" form:"name"`
-	UserID uint   `json:"user_id" form:"user_id"`
+	ID        uint   `json:"id" form:"id"`
+	ClassName string `json:"class_name" form:"class_name"`
+	UserID    uint   `json:"user_id" form:"user_id"`
 }
 
 func toCore(i interface{}) class.Core {
@@ -20,16 +20,16 @@ func toCore(i interface{}) class.Core {
 	case CreateClassRequest:
 		cnv := i.(CreateClassRequest)
 		return class.Core{
-			Name:   cnv.Name,
-			UserID: cnv.UserID,
+			ClassName: cnv.ClassName,
+			UserID:    cnv.UserID,
 		}
 
 	case UpdateClassRequest:
 		cnv := i.(UpdateClassRequest)
 		return class.Core{
-			ID:     cnv.ID,
-			Name:   cnv.Name,
-			UserID: cnv.UserID,
+			ID:        cnv.ID,
+			ClassName: cnv.ClassName,
+			UserID:    cnv.UserID,
 		}
 	}
 

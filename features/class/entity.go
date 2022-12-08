@@ -7,7 +7,7 @@ import (
 
 type Core struct {
 	ID        uint
-	Name      string
+	ClassName string
 	UserID    uint
 	CreatedAt time.Time
 	UpdatedAt time.Time

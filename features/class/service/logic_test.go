@@ -12,7 +12,7 @@ import (
 func TestCreateClass(t *testing.T) {
 	repo := new(mocks.ClassRepository)
 	t.Run("Success Create class", func(t *testing.T) {
-		inputRepo := class.Core{Name: "alta", UserID: 1}
+		inputRepo := class.Core{ClassName: "alta", UserID: 1}
 		repo.On("CreateClass", inputRepo).Return(nil).Once()
 		srv := New(repo)
 		err := srv.CreateClass(inputRepo)
@@ -21,7 +21,7 @@ func TestCreateClass(t *testing.T) {
 	})
 
 	t.Run("Failed Create class", func(t *testing.T) {
-		inputRepo := class.Core{Name: "ALTA", UserID: 1}
+		inputRepo := class.Core{ClassName: "ALTA", UserID: 1}
 		repo.On("CreateClass", inputRepo).Return(errors.New("failed")).Once()
 		srv := New(repo)
 		err := srv.CreateClass(inputRepo)
