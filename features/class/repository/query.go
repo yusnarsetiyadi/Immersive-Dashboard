@@ -3,6 +3,7 @@ package repository
 import (
 	"api-alta-dashboard/features/class"
 	"errors"
+	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -24,6 +25,7 @@ func (repo *classRepository) CreateClass(input class.Core) error {
 	if tx.Error != nil {
 		return tx.Error
 	}
+
 	if tx.RowsAffected == 0 {
 		return errors.New("create failed")
 	}
@@ -38,6 +40,13 @@ func (repo *classRepository) GetAllClass() (data []class.Core, err error) {
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
+
+	if tx.RowsAffected == 0 {
+		return data, errors.New("Data not found.")
+	}
+
+	fmt.Println("\n\n 1 getall class = ", classes)
+
 	var dataCore = toCoreList(classes)
 	return dataCore, nil
 }
@@ -46,10 +55,17 @@ func (repo *classRepository) GetAllClass() (data []class.Core, err error) {
 func (repo *classRepository) GetAllWithSearchClass(query string) (data []class.Core, err error) {
 	var classes []Class
 
-	tx := repo.db.Where("name LIKE ?", "%"+query+"%").Find(&classes)
+	tx := repo.db.Preload("User").Where("class_name LIKE ?", "%"+query+"%").Find(&classes)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
+
+	if tx.RowsAffected == 0 {
+		return data, errors.New("Data not found.")
+	}
+
+	fmt.Println("\n\n 2 getall class = ", classes)
+
 	var dataCore = toCoreList(classes)
 	return dataCore, nil
 }
@@ -65,8 +81,10 @@ func (repo *classRepository) GetByIdClass(id int) (data class.Core, err error) {
 	}
 
 	if tx.RowsAffected == 0 {
-		return data, errors.New("error")
+		return data, errors.New("Data not found.")
 	}
+
+	fmt.Println("\n\n 3 getall class = ", class)
 
 	var dataCore = class.toCore()
 	return dataCore, nil
