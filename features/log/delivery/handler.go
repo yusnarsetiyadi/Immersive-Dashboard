@@ -44,12 +44,16 @@ func (delivery *LogDelivery) GetAllLog(c echo.Context) error {
 
 func (delivery *LogDelivery) CreateLog(c echo.Context) error {
 	logInput := CreateLogRequest{}
+	userID := middlewares.ExtractTokenUserId(c)
+
 	errBind := c.Bind(&logInput) // menangkap data yg dikirim dari req body dan disimpan ke variabel
+
 	if errBind != nil {
 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data. "+errBind.Error()))
 	}
 
 	dataCore := toCore(logInput)
+	dataCore.UserID = uint(userID)
 	err := delivery.logService.CreateLog(dataCore)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, helper.FailedResponse("Failed create data. "+err.Error()))

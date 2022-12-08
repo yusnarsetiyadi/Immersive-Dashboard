@@ -1,6 +1,7 @@
 package repository
 
 import (
+	_log "api-alta-dashboard/features/log/repository"
 	_mentee "api-alta-dashboard/features/mentee"
 
 	"gorm.io/gorm"
@@ -27,6 +28,7 @@ type Mentee struct {
 	EducationMajor    string
 	EducationGraduate string
 	ClassID           uint `validate:"required"`
+	Logs              []_log.Log
 }
 
 // DTO

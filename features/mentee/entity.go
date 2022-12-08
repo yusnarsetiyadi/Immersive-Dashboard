@@ -21,8 +21,26 @@ type Core struct {
 	EducationMajor    string
 	EducationGraduate string
 	ClassID           uint `validate:"required"`
+	Logs              []LogCore
 	CreatedAt         time.Time
 	UpdatedAt         time.Time
+}
+
+type LogCore struct {
+	ID        uint
+	Title     string
+	Feedback  string
+	Status    string
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	User      UserCore
+}
+
+type UserCore struct {
+	ID       uint
+	FullName string
+	Role     string
+	Status   string
 }
 
 type ServiceInterface interface {

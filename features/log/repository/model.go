@@ -2,7 +2,6 @@ package repository
 
 import (
 	_log "api-alta-dashboard/features/log"
-	_mentee "api-alta-dashboard/features/mentee/repository"
 	"api-alta-dashboard/features/user"
 	_user "api-alta-dashboard/features/user/repository"
 
@@ -18,7 +17,6 @@ type Log struct {
 	UserID   uint
 	MenteeID uint
 	User     _user.User
-	Mentee   _mentee.Mentee
 }
 
 // DTO
@@ -39,12 +37,12 @@ func fromCore(dataCore _log.Core) Log {
 // mengubah struct model gorm ke struct core
 func (dataModel *Log) toCore() _log.Core {
 	return _log.Core{
-		ID:       dataModel.ID,
-		Title:    dataModel.Title,
-		Feedback: dataModel.Feedback,
-		Status:   dataModel.Status,
-		MenteeID: dataModel.MenteeID,
-		UserID:   dataModel.UserID,
+		ID:        dataModel.ID,
+		Title:     dataModel.Title,
+		Feedback:  dataModel.Feedback,
+		CreatedAt: dataModel.CreatedAt,
+		Status:    dataModel.Status,
+		UserID:    dataModel.UserID,
 		User: user.Core{
 			FullName: dataModel.User.FullName,
 			Email:    dataModel.User.Email,
@@ -52,6 +50,7 @@ func (dataModel *Log) toCore() _log.Core {
 			Role:     dataModel.User.Role,
 			Status:   dataModel.User.Status,
 		},
+		MenteeID: dataModel.MenteeID,
 	}
 }
 
