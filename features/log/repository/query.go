@@ -34,7 +34,7 @@ func (repo *logRepository) CreateLog(input log.Core) error {
 func (repo *logRepository) GetAllLog() (data []log.Core, err error) {
 	var logs []Log
 
-	tx := repo.db.Preload("Mentee").Preload("User").Find(&logs)
+	tx := repo.db.Preload("User").Find(&logs)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}

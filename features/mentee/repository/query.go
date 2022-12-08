@@ -4,6 +4,7 @@ import (
 	"api-alta-dashboard/features/mentee"
 	"api-alta-dashboard/utils/helper"
 	"errors"
+	"fmt"
 	"strconv"
 
 	"gorm.io/gorm"
@@ -88,7 +89,7 @@ func (repo *menteeRepository) GetAllWithSearch(queryName, queryStatus, queryIdCl
 func (repo *menteeRepository) GetById(id int) (data mentee.Core, err error) {
 	var mentee Mentee
 
-	tx := repo.db.First(&mentee, id)
+	tx := repo.db.Preload("Logs.User").First(&mentee, id)
 
 	if tx.Error != nil {
 		return data, tx.Error
@@ -97,7 +98,7 @@ func (repo *menteeRepository) GetById(id int) (data mentee.Core, err error) {
 	if tx.RowsAffected == 0 {
 		return data, errors.New("Data not found.")
 	}
-
+	fmt.Println("\n\n\n data mentee", mentee)
 	var dataCore = mentee.toCore()
 	return dataCore, nil
 }
