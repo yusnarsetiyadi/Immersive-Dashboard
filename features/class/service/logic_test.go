@@ -116,4 +116,14 @@ func TestGetAllClass(t *testing.T) {
 		assert.Nil(t, response)
 		repo.AssertExpectations(t)
 	})
+
+	t.Run("Success get all with search class", func(t *testing.T) {
+		inputRepo := []class.Core{{ID: 1, ClassName: "alta", UserID: 1}}
+		repo.On("GetAllWithSearchClass", "query").Return(inputRepo, nil).Once()
+		srv := New(repo)
+		response, err := srv.GetAllClass("query")
+		assert.NoError(t, err)
+		assert.Equal(t, inputRepo[0].ClassName, response[0].ClassName)
+		repo.AssertExpectations(t)
+	})
 }

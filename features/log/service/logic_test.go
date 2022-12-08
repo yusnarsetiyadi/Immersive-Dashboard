@@ -94,13 +94,13 @@ func TestGetAllLog(t *testing.T) {
 		repo.AssertExpectations(t)
 	})
 
-	// t.Run("Success get all class", func(t *testing.T) {
-	// 	inputRepo := []class.Core{{ID: 1, ClassName: "alta", UserID: 1}}
-	// 	repo.On("GetAllClass").Return(inputRepo, nil).Once()
-	// 	srv := New(repo)
-	// 	response, err := srv.GetAllClass("query")
-	// 	assert.NoError(t, err)
-	// 	assert.Equal(t, inputRepo[0].ClassName, response[0].ClassName)
-	// 	repo.AssertExpectations(t)
-	// })
+	t.Run("Success get all with search log", func(t *testing.T) {
+		inputRepo := []log.Core{{ID: 1, Title: "alta", Feedback: "alta", Status: "alta", UserID: 1, MenteeID: 1}}
+		repo.On("GetAllWithSearchLog", "query").Return(inputRepo, nil).Once()
+		srv := New(repo)
+		response, err := srv.GetAllLog("query")
+		assert.NoError(t, err)
+		assert.Equal(t, inputRepo[0].Title, response[0].Title)
+		repo.AssertExpectations(t)
+	})
 }
