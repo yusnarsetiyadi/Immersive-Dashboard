@@ -1,1 +1,22 @@
 mode: set
+api-alta-dashboard/features/class/service/logic.go:15.65,20.2 1 1
+api-alta-dashboard/features/class/service/logic.go:22.72,27.71 1 1
+api-alta-dashboard/features/class/service/logic.go:32.2,33.22 2 1
+api-alta-dashboard/features/class/service/logic.go:38.2,38.12 1 1
+api-alta-dashboard/features/class/service/logic.go:27.71,30.3 2 0
+api-alta-dashboard/features/class/service/logic.go:33.22,36.3 2 1
+api-alta-dashboard/features/class/service/logic.go:41.87,42.17 1 1
+api-alta-dashboard/features/class/service/logic.go:48.2,48.16 1 1
+api-alta-dashboard/features/class/service/logic.go:52.2,52.18 1 1
+api-alta-dashboard/features/class/service/logic.go:42.17,44.3 1 1
+api-alta-dashboard/features/class/service/logic.go:44.8,46.3 1 1
+api-alta-dashboard/features/class/service/logic.go:48.16,50.3 1 1
+api-alta-dashboard/features/class/service/logic.go:55.80,57.16 2 1
+api-alta-dashboard/features/class/service/logic.go:61.2,61.18 1 1
+api-alta-dashboard/features/class/service/logic.go:57.16,60.3 2 1
+api-alta-dashboard/features/class/service/logic.go:65.74,67.22 2 1
+api-alta-dashboard/features/class/service/logic.go:72.2,72.12 1 1
+api-alta-dashboard/features/class/service/logic.go:67.22,70.3 2 1
+api-alta-dashboard/features/class/service/logic.go:75.56,77.22 2 1
+api-alta-dashboard/features/class/service/logic.go:81.2,81.12 1 1
+api-alta-dashboard/features/class/service/logic.go:77.22,80.3 2 1
