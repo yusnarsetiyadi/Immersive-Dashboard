@@ -57,6 +57,7 @@ func (repo *menteeRepository) GetAll() (data []mentee.Core, err error) {
 // GetAll with search by name implements user.Repository
 func (repo *menteeRepository) GetAllWithSearch(queryName, queryStatus, queryIdClass, queryEdType string) (data []mentee.Core, err error) {
 	var mentees []Mentee
+	var mentees2 []Mentee
 
 	helper.LogDebug("\n iniiii isi queryName = ", queryName)
 	helper.LogDebug("\n isi queryIDClass= ", queryIdClass)
@@ -71,12 +72,14 @@ func (repo *menteeRepository) GetAllWithSearch(queryName, queryStatus, queryIdCl
 		return nil, errors.New("error conver class id to filter")
 	}
 
-	yx := repo.db.Where("name LIKE ?", "%"+queryName+"%")
-	if yx.Error != nil {
-		return nil, yx.Error
+	tx := repo.db.Where("name LIKE ?", "%"+queryName+"%").Find(&mentees)
+	if tx.Error != nil {
+		helper.LogDebug(tx.Error)
+		return nil, tx.Error
 	}
-
-	tx := repo.db.Where(&Mentee{Status: queryStatus, ClassID: uint(intIdClass), EducationType: queryEdType}).Find(&mentees)
+	fmt.Println("\n\nMentees 1", mentees)
+	tx = repo.db.Model(&mentees).Where(&Mentee{Status: queryStatus, ClassID: uint(intIdClass), EducationType: queryEdType}).Find(&mentees2)
+	fmt.Println("\n\nMentees 2", mentees2)
 	// tx = repo.db.Where("name LIKE ?", "%"+queryName+"%").Find(&mentees)
 	// tx := repo.db.Where("name LIKE ?", "%"+queryName+"%")
 	// tx = repo.db.Where("status = ?", queryStatus)
@@ -86,7 +89,7 @@ func (repo *menteeRepository) GetAllWithSearch(queryName, queryStatus, queryIdCl
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
-	var dataCore = toCoreList(mentees)
+	var dataCore = toCoreList(mentees2)
 	return dataCore, nil
 }
 
