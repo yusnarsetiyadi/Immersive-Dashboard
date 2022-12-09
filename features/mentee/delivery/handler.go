@@ -37,6 +37,8 @@ func (delivery *MenteeDelivery) GetAll(c echo.Context) error {
 	queryStatus := c.QueryParam("status")
 	queryEducationType := c.QueryParam("education_type")
 
+	helper.LogDebug("\n\n\nULALA")
+
 	// debug cek query param masuk
 	helper.LogDebug("\n isi queryName = ", queryName)
 	helper.LogDebug("\n isi queryIDClass= ", queryIdClass)
