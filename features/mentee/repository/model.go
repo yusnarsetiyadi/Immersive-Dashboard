@@ -71,6 +71,10 @@ func (dataModel *Mentee) toCore() _mentee.Core {
 			Title:    val.Title,
 			Feedback: val.Feedback,
 			Status:   val.Status,
+			User: _mentee.UserCore{
+				ID:       val.User.ID,
+				FullName: val.User.FullName,
+			},
 		})
 	}
 	return _mentee.Core{
