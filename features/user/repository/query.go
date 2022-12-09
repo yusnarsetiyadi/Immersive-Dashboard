@@ -18,16 +18,16 @@ func New(db *gorm.DB) user.RepositoryInterface {
 }
 
 // Create implements user.Repository
-func (repo *userRepository) Create(input user.Core) (row int, err error) {
+func (repo *userRepository) Create(input user.Core) error {
 	userGorm := fromCore(input)
 	tx := repo.db.Create(&userGorm) // proses insert data
 	if tx.Error != nil {
-		return -1, tx.Error
+		return tx.Error
 	}
 	if tx.RowsAffected == 0 {
-		return 0, errors.New("insert failed")
+		return errors.New("insert failed")
 	}
-	return int(tx.RowsAffected), nil
+	return nil
 }
 
 // GetAll implements user.Repository
@@ -65,7 +65,7 @@ func (repo *userRepository) GetById(id int) (data user.Core, err error) {
 	}
 
 	if tx.RowsAffected == 0 {
-		return data, errors.New("Data not found.")
+		return data, tx.Error
 	}
 
 	var dataCore = user.toCore()
@@ -73,41 +73,40 @@ func (repo *userRepository) GetById(id int) (data user.Core, err error) {
 }
 
 // Update implements user.Repository
-func (repo *userRepository) Update(input user.Core, id int) (row int, err error) {
+func (repo *userRepository) Update(input user.Core, id int) error {
 	userGorm := fromCore(input)
 	var user User
 	tx := repo.db.Model(&user).Where("ID = ?", id).Updates(&userGorm) // proses update
 	if tx.Error != nil {
-		return -1, tx.Error
+		return tx.Error
 	}
 	if tx.RowsAffected == 0 {
-		return 0, errors.New("update failed")
+		return errors.New("update failed")
 	}
-	return int(tx.RowsAffected), nil
+	return nil
 }
 
 // Delete implements user.Repository
-func (repo *userRepository) Delete(id int) (row int, err error) {
+func (repo *userRepository) Delete(id int) error {
 	var user User
 	tx := repo.db.Delete(&user, id) // proses delete
 	if tx.Error != nil {
-		return -1, tx.Error
+		return tx.Error
 	}
 	if tx.RowsAffected == 0 {
-		return 0, errors.New("delete failed")
+		return errors.New("delete failed")
 	}
-	return int(tx.RowsAffected), nil
+	return nil
 }
 
-func (repo *userRepository) FindUser(email string) (result user.Core, rowAffected int, err error) {
+func (repo *userRepository) FindUser(email string) (result user.Core, err error) {
 	var userData User
 	tx := repo.db.Where("email = ?", email).First(&userData)
-	rowAffected = int(tx.RowsAffected)
 	if tx.Error != nil {
-		return user.Core{}, rowAffected, tx.Error
+		return user.Core{}, tx.Error
 	}
 
 	result = userData.toCore()
 
-	return result, rowAffected, nil
+	return result, nil
 }

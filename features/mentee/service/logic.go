@@ -3,7 +3,6 @@ package service
 import (
 	"api-alta-dashboard/features/mentee"
 	"api-alta-dashboard/utils/helper"
-	"errors"
 	"strings"
 
 	"github.com/go-playground/validator/v10"
@@ -31,20 +30,20 @@ func (service *menteeService) Create(input mentee.Core) (err error) {
 	}
 
 	// validasi email harus unik
-	_, rowAffected, errFindEmail := service.menteeRepository.FindUser(input.Email)
+	_, errFindEmail := service.menteeRepository.FindUser(input.Email)
 
 	// helper.LogDebug("\n\n\n find email res  ", res)
 	// helper.LogDebug("\n\n\n find email rowAffected  ", rowAffected)
 
-	if rowAffected > 0 {
-		return errors.New("Failed. Email " + input.Email + " already exist. Please pick another email.")
-	}
+	// if rowAffected > 0 {
+	// 	return errors.New("Failed. Email " + input.Email + " already exist. Please pick another email.")
+	// }
 
 	if errFindEmail != nil && !strings.Contains(errFindEmail.Error(), "found") {
 		return helper.ServiceErrorMsg(errFindEmail)
 	}
 
-	_, errCreate := service.menteeRepository.Create(input)
+	errCreate := service.menteeRepository.Create(input)
 	if errCreate != nil {
 		log.Error(errCreate.Error())
 		return helper.ServiceErrorMsg(err)
@@ -99,7 +98,7 @@ func (service *menteeService) Update(input mentee.Core, id int) error {
 	}
 
 	// proses
-	_, err := service.menteeRepository.Update(input, id)
+	err := service.menteeRepository.Update(input, id)
 	if err != nil {
 		log.Error(err.Error())
 		return helper.ServiceErrorMsg(err)
@@ -117,7 +116,7 @@ func (service *menteeService) Delete(id int) error {
 	}
 
 	// proses
-	_, err := service.menteeRepository.Delete(id)
+	err := service.menteeRepository.Delete(id)
 	if err != nil {
 		log.Error(err.Error())
 		return helper.ServiceErrorMsg(err)
