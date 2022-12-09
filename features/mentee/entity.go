@@ -57,7 +57,7 @@ type ServiceInterface interface {
 }
 
 type RepositoryInterface interface {
-	GetAll(queryStatus, queryIdClass, queryEdType string) (data []Core, err error)
+	GetAll() (data []Core, err error)
 	GetAllWithSearch(queryName, queryStatus, queryIdClass, queryEdType string) (data []Core, err error)
 	Create(input Core) (row int, err error)
 	GetById(id int) (data Core, err error)

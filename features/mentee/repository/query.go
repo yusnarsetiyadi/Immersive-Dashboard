@@ -34,8 +34,9 @@ func (repo *menteeRepository) Create(input mentee.Core) (row int, err error) {
 }
 
 // GetAll implements user.Repository
-func (repo *menteeRepository) GetAll(queryStatus, queryIdClass, queryEdType string) (data []mentee.Core, err error) {
+func (repo *menteeRepository) GetAll() (data []mentee.Core, err error) {
 	var mentees []Mentee
+	var queryStatus, queryIdClass, queryEdType string
 
 	if len(queryIdClass) == 0 {
 		queryIdClass = "0"
@@ -70,8 +71,12 @@ func (repo *menteeRepository) GetAllWithSearch(queryName, queryStatus, queryIdCl
 		return nil, errors.New("error conver class id to filter")
 	}
 
-	tx := repo.db.Where("name LIKE ?", "%"+queryName+"%")
-	tx = repo.db.Where(&Mentee{Status: queryStatus, ClassID: uint(intIdClass), EducationType: queryEdType}).Find(&mentees)
+	yx := repo.db.Where("name LIKE ?", "%"+queryName+"%")
+	if yx.Error != nil {
+		return nil, yx.Error
+	}
+
+	tx := repo.db.Where(&Mentee{Status: queryStatus, ClassID: uint(intIdClass), EducationType: queryEdType}).Find(&mentees)
 	// tx = repo.db.Where("name LIKE ?", "%"+queryName+"%").Find(&mentees)
 	// tx := repo.db.Where("name LIKE ?", "%"+queryName+"%")
 	// tx = repo.db.Where("status = ?", queryStatus)

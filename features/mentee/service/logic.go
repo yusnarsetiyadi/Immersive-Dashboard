@@ -55,8 +55,12 @@ func (service *menteeService) Create(input mentee.Core) (err error) {
 
 // GetAll implements user.ServiceInterface
 func (service *menteeService) GetAll(queryName, queryStatus, queryIdClass, queryEdType string) (data []mentee.Core, err error) {
-
-	data, err = service.menteeRepository.GetAllWithSearch(queryName, queryStatus, queryIdClass, queryEdType)
+	if queryName == "" && queryStatus == "" && queryIdClass == "" && queryEdType == "" {
+		data, err = service.menteeRepository.GetAll()
+	}
+	if queryName == "not nil" || queryStatus == "not nil" || queryIdClass == "not nil" || queryEdType == "not nil" {
+		data, err = service.menteeRepository.GetAllWithSearch(queryName, queryStatus, queryIdClass, queryEdType)
+	}
 
 	// if len(queryName) == 0 {
 	// 	data, err = service.menteeRepository.GetAll(queryStatus, queryIdClass, queryEdType)
@@ -68,10 +72,10 @@ func (service *menteeService) GetAll(queryName, queryStatus, queryIdClass, query
 		return nil, helper.ServiceErrorMsg(err)
 	}
 
-	if len(data) == 0 {
-		helper.LogDebug("Get data success. No data.")
-		return nil, errors.New("Get data success. No data.")
-	}
+	// if len(data) == 0 {
+	// 	helper.LogDebug("Get data success. No data.")
+	// 	return nil, errors.New("Get data success. No data.")
+	// }
 
 	return data, err
 }
