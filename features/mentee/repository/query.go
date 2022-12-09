@@ -72,13 +72,13 @@ func (repo *menteeRepository) GetAllWithSearch(queryName, queryStatus, queryIdCl
 		return nil, errors.New("error conver class id to filter")
 	}
 
-	tx := repo.db.Where("name LIKE ?", "%"+queryName+"%").Find(&mentees)
-	if tx.Error != nil {
-		helper.LogDebug(tx.Error)
-		return nil, tx.Error
-	}
+	// tx := repo.db.Where("name LIKE ?", "%"+queryName+"%").Find(&mentees)
+	// if tx.Error != nil {
+	// 	helper.LogDebug(tx.Error)
+	// 	return nil, tx.Error
+	// }
 	fmt.Println("\n\nMentees 1", mentees)
-	tx = repo.db.Model(&mentees).Where(&Mentee{Status: queryStatus, ClassID: uint(intIdClass), EducationType: queryEdType}).Find(&mentees2)
+	tx := repo.db.Where("name LIKE ?", "%"+queryName+"%").Where(&Mentee{Status: queryStatus, ClassID: uint(intIdClass), EducationType: queryEdType}).Find(&mentees2)
 	fmt.Println("\n\nMentees 2", mentees2)
 	// tx = repo.db.Where("name LIKE ?", "%"+queryName+"%").Find(&mentees)
 	// tx := repo.db.Where("name LIKE ?", "%"+queryName+"%")
