@@ -14,9 +14,9 @@ package service
 
 // 	t.Run("Success Login", func(t *testing.T) {
 // 		inputData := auth.Core{Email: "Budi@gmail.com", Password: "13123123"}
-// 		returnData := auth.Core{ID: 1, FullName: "Budi", Email: "Budi@gmail.com", Password: "13123123", Role: "user"}
+// 		returnData := auth.Core{ID: 1, FullName: "Budi", Email: "Budi@gmail.com", Password: "13123123", Role: "user", Status: "alta", Team: "alta"}
 
-// 		repo.On("FindUser").Return(returnData, nil).Once()
+// 		repo.On("FindUser", inputData.Email).Return(returnData, nil).Once()
 // 		srv := New(repo)
 // 		result, token, errLogin := srv.Login(inputData)
 

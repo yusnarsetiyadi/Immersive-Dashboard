@@ -3,7 +3,7 @@ package service
 import (
 	"api-alta-dashboard/features/user"
 	"api-alta-dashboard/utils/helper"
-	"errors"
+
 	"strings"
 
 	"github.com/go-playground/validator/v10"
@@ -39,14 +39,14 @@ func (service *userService) Create(input user.Core) (err error) {
 	}
 
 	// validasi email harus unik
-	_, rowAffected, errFindEmail := service.userRepository.FindUser(input.Email)
+	_, errFindEmail := service.userRepository.FindUser(input.Email)
 
 	// helper.LogDebug("\n\n\n find email res  ", res)
 	// helper.LogDebug("\n\n\n find email rowAffected  ", rowAffected)
 
-	if rowAffected > 0 {
-		return errors.New("Failed. Email " + input.Email + " already exist. Please pick another email.")
-	}
+	// if rowAffected > 0 {
+	// 	return errors.New("Failed. Email " + input.Email + " already exist. Please pick another email.")
+	// }
 
 	if errFindEmail != nil && !strings.Contains(errFindEmail.Error(), "found") {
 		return helper.ServiceErrorMsg(errFindEmail)
@@ -60,7 +60,7 @@ func (service *userService) Create(input user.Core) (err error) {
 
 	input.Password = string(bytePass)
 
-	_, errCreate := service.userRepository.Create(input)
+	errCreate := service.userRepository.Create(input)
 	if errCreate != nil {
 		log.Error(errCreate.Error())
 		return helper.ServiceErrorMsg(err)
@@ -115,7 +115,7 @@ func (service *userService) Update(input user.Core, id int) error {
 	}
 
 	// proses
-	_, err := service.userRepository.Update(input, id)
+	err := service.userRepository.Update(input, id)
 	if err != nil {
 		log.Error(err.Error())
 		return helper.ServiceErrorMsg(err)
@@ -133,7 +133,7 @@ func (service *userService) Delete(id int) error {
 	}
 
 	// proses
-	_, err := service.userRepository.Delete(id)
+	err := service.userRepository.Delete(id)
 	if err != nil {
 		log.Error(err.Error())
 		return helper.ServiceErrorMsg(err)

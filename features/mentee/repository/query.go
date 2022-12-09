@@ -21,16 +21,16 @@ func New(db *gorm.DB) mentee.RepositoryInterface {
 }
 
 // Create implements user.Repository
-func (repo *menteeRepository) Create(input mentee.Core) (row int, err error) {
+func (repo *menteeRepository) Create(input mentee.Core) error {
 	userGorm := fromCore(input)
 	tx := repo.db.Create(&userGorm) // proses insert data
 	if tx.Error != nil {
-		return -1, tx.Error
+		return tx.Error
 	}
 	if tx.RowsAffected == 0 {
-		return 0, errors.New("insert failed")
+		return errors.New("insert failed")
 	}
-	return int(tx.RowsAffected), nil
+	return nil
 }
 
 // GetAll implements user.Repository
@@ -113,41 +113,40 @@ func (repo *menteeRepository) GetById(id int) (data mentee.Core, err error) {
 }
 
 // Update implements user.Repository
-func (repo *menteeRepository) Update(input mentee.Core, id int) (row int, err error) {
+func (repo *menteeRepository) Update(input mentee.Core, id int) error {
 	userGorm := fromCore(input)
 	var user Mentee
 	tx := repo.db.Model(&user).Where("ID = ?", id).Updates(&userGorm) // proses update
 	if tx.Error != nil {
-		return -1, tx.Error
+		return tx.Error
 	}
 	if tx.RowsAffected == 0 {
-		return 0, errors.New("update failed")
+		return errors.New("update failed")
 	}
-	return int(tx.RowsAffected), nil
+	return nil
 }
 
 // Delete implements user.Repository
-func (repo *menteeRepository) Delete(id int) (row int, err error) {
+func (repo *menteeRepository) Delete(id int) error {
 	var user Mentee
 	tx := repo.db.Delete(&user, id) // proses delete
 	if tx.Error != nil {
-		return -1, tx.Error
+		return tx.Error
 	}
 	if tx.RowsAffected == 0 {
-		return 0, errors.New("delete failed")
+		return errors.New("delete failed")
 	}
-	return int(tx.RowsAffected), nil
+	return nil
 }
 
-func (repo *menteeRepository) FindUser(email string) (result mentee.Core, rowAffected int, err error) {
+func (repo *menteeRepository) FindUser(email string) (result mentee.Core, err error) {
 	var userData Mentee
 	tx := repo.db.Where("email = ?", email).First(&userData)
-	rowAffected = int(tx.RowsAffected)
 	if tx.Error != nil {
-		return mentee.Core{}, rowAffected, tx.Error
+		return mentee.Core{}, tx.Error
 	}
 
 	result = userData.toCore()
 
-	return result, rowAffected, nil
+	return result, nil
 }

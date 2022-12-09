@@ -14,49 +14,35 @@ type MenteeRepository struct {
 }
 
 // Create provides a mock function with given fields: input
-func (_m *MenteeRepository) Create(input mentee.Core) (int, error) {
+func (_m *MenteeRepository) Create(input mentee.Core) error {
 	ret := _m.Called(input)
 
-	var r0 int
-	if rf, ok := ret.Get(0).(func(mentee.Core) int); ok {
+	var r0 error
+	if rf, ok := ret.Get(0).(func(mentee.Core) error); ok {
 		r0 = rf(input)
 	} else {
-		r0 = ret.Get(0).(int)
+		r0 = ret.Error(0)
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(mentee.Core) error); ok {
-		r1 = rf(input)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
 // Delete provides a mock function with given fields: id
-func (_m *MenteeRepository) Delete(id int) (int, error) {
+func (_m *MenteeRepository) Delete(id int) error {
 	ret := _m.Called(id)
 
-	var r0 int
-	if rf, ok := ret.Get(0).(func(int) int); ok {
+	var r0 error
+	if rf, ok := ret.Get(0).(func(int) error); ok {
 		r0 = rf(id)
 	} else {
-		r0 = ret.Get(0).(int)
+		r0 = ret.Error(0)
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(int) error); ok {
-		r1 = rf(id)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
 // FindUser provides a mock function with given fields: email
-func (_m *MenteeRepository) FindUser(email string) (mentee.Core, int, error) {
+func (_m *MenteeRepository) FindUser(email string) (mentee.Core, error) {
 	ret := _m.Called(email)
 
 	var r0 mentee.Core
@@ -66,30 +52,23 @@ func (_m *MenteeRepository) FindUser(email string) (mentee.Core, int, error) {
 		r0 = ret.Get(0).(mentee.Core)
 	}
 
-	var r1 int
-	if rf, ok := ret.Get(1).(func(string) int); ok {
+	var r1 error
+	if rf, ok := ret.Get(1).(func(string) error); ok {
 		r1 = rf(email)
 	} else {
-		r1 = ret.Get(1).(int)
+		r1 = ret.Error(1)
 	}
 
-	var r2 error
-	if rf, ok := ret.Get(2).(func(string) error); ok {
-		r2 = rf(email)
-	} else {
-		r2 = ret.Error(2)
-	}
-
-	return r0, r1, r2
+	return r0, r1
 }
 
-// GetAll provides a mock function with given fields: queryStatus, queryIdClass, queryEdType
-func (_m *MenteeRepository) GetAll(queryStatus string, queryIdClass string, queryEdType string) ([]mentee.Core, error) {
-	ret := _m.Called(queryStatus, queryIdClass, queryEdType)
+// GetAll provides a mock function with given fields:
+func (_m *MenteeRepository) GetAll() ([]mentee.Core, error) {
+	ret := _m.Called()
 
 	var r0 []mentee.Core
-	if rf, ok := ret.Get(0).(func(string, string, string) []mentee.Core); ok {
-		r0 = rf(queryStatus, queryIdClass, queryEdType)
+	if rf, ok := ret.Get(0).(func() []mentee.Core); ok {
+		r0 = rf()
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).([]mentee.Core)
@@ -97,8 +76,8 @@ func (_m *MenteeRepository) GetAll(queryStatus string, queryIdClass string, quer
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(string, string, string) error); ok {
-		r1 = rf(queryStatus, queryIdClass, queryEdType)
+	if rf, ok := ret.Get(1).(func() error); ok {
+		r1 = rf()
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -151,24 +130,17 @@ func (_m *MenteeRepository) GetById(id int) (mentee.Core, error) {
 }
 
 // Update provides a mock function with given fields: input, id
-func (_m *MenteeRepository) Update(input mentee.Core, id int) (int, error) {
+func (_m *MenteeRepository) Update(input mentee.Core, id int) error {
 	ret := _m.Called(input, id)
 
-	var r0 int
-	if rf, ok := ret.Get(0).(func(mentee.Core, int) int); ok {
+	var r0 error
+	if rf, ok := ret.Get(0).(func(mentee.Core, int) error); ok {
 		r0 = rf(input, id)
 	} else {
-		r0 = ret.Get(0).(int)
+		r0 = ret.Error(0)
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(mentee.Core, int) error); ok {
-		r1 = rf(input, id)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
 type mockConstructorTestingTNewMenteeRepository interface {

@@ -14,49 +14,35 @@ type UserRepository struct {
 }
 
 // Create provides a mock function with given fields: input
-func (_m *UserRepository) Create(input user.Core) (int, error) {
+func (_m *UserRepository) Create(input user.Core) error {
 	ret := _m.Called(input)
 
-	var r0 int
-	if rf, ok := ret.Get(0).(func(user.Core) int); ok {
+	var r0 error
+	if rf, ok := ret.Get(0).(func(user.Core) error); ok {
 		r0 = rf(input)
 	} else {
-		r0 = ret.Get(0).(int)
+		r0 = ret.Error(0)
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(user.Core) error); ok {
-		r1 = rf(input)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
 // Delete provides a mock function with given fields: id
-func (_m *UserRepository) Delete(id int) (int, error) {
+func (_m *UserRepository) Delete(id int) error {
 	ret := _m.Called(id)
 
-	var r0 int
-	if rf, ok := ret.Get(0).(func(int) int); ok {
+	var r0 error
+	if rf, ok := ret.Get(0).(func(int) error); ok {
 		r0 = rf(id)
 	} else {
-		r0 = ret.Get(0).(int)
+		r0 = ret.Error(0)
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(int) error); ok {
-		r1 = rf(id)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
 // FindUser provides a mock function with given fields: email
-func (_m *UserRepository) FindUser(email string) (user.Core, int, error) {
+func (_m *UserRepository) FindUser(email string) (user.Core, error) {
 	ret := _m.Called(email)
 
 	var r0 user.Core
@@ -66,21 +52,14 @@ func (_m *UserRepository) FindUser(email string) (user.Core, int, error) {
 		r0 = ret.Get(0).(user.Core)
 	}
 
-	var r1 int
-	if rf, ok := ret.Get(1).(func(string) int); ok {
+	var r1 error
+	if rf, ok := ret.Get(1).(func(string) error); ok {
 		r1 = rf(email)
 	} else {
-		r1 = ret.Get(1).(int)
+		r1 = ret.Error(1)
 	}
 
-	var r2 error
-	if rf, ok := ret.Get(2).(func(string) error); ok {
-		r2 = rf(email)
-	} else {
-		r2 = ret.Error(2)
-	}
-
-	return r0, r1, r2
+	return r0, r1
 }
 
 // GetAll provides a mock function with given fields:
@@ -151,24 +130,17 @@ func (_m *UserRepository) GetById(id int) (user.Core, error) {
 }
 
 // Update provides a mock function with given fields: input, id
-func (_m *UserRepository) Update(input user.Core, id int) (int, error) {
+func (_m *UserRepository) Update(input user.Core, id int) error {
 	ret := _m.Called(input, id)
 
-	var r0 int
-	if rf, ok := ret.Get(0).(func(user.Core, int) int); ok {
+	var r0 error
+	if rf, ok := ret.Get(0).(func(user.Core, int) error); ok {
 		r0 = rf(input, id)
 	} else {
-		r0 = ret.Get(0).(int)
+		r0 = ret.Error(0)
 	}
 
-	var r1 error
-	if rf, ok := ret.Get(1).(func(user.Core, int) error); ok {
-		r1 = rf(input, id)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
 type mockConstructorTestingTNewUserRepository interface {
