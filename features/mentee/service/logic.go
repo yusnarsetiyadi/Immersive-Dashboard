@@ -3,6 +3,7 @@ package service
 import (
 	"api-alta-dashboard/features/mentee"
 	"api-alta-dashboard/utils/helper"
+	"errors"
 	"strings"
 
 	"github.com/go-playground/validator/v10"
