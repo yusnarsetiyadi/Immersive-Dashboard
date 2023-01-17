@@ -42,7 +42,7 @@ Try our program by:
 
 1. Try the functionality
 
-- visit the [EO-Bozz](https://irisminty.my.id)
+- visit the [Immersive-Dashboard-App](https://irisminty.my.id)
 
 2. Customization of functionality
 
@@ -59,10 +59,3 @@ cd BE-API-EO-Bozz-capstone-alta1/
 
 - [Faishal](https://github.com/mfaishal882)
 - [Yusnar](https://github.com/yusnarsetiyadi)
-
-# Frontend Contributors
-
-- [Novalia](https://github.com/Novalia9517)
-- [Gilang Suprobo](https://github.com/gilangsup)
-
-# [Frontend Repository](https://github.com/Alta-Capstone-Grup2/Frontend)
