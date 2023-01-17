@@ -13,7 +13,7 @@ The Immersive Dashboard is a clone of the Immersive Dashboard Alterra Academy wh
 
 # ERD Project
 
-![erd-eo-bozz v3](https://user-images.githubusercontent.com/116538882/211174918-36b8da21-c936-4aae-b1fc-2136b120f15a.jpg)
+![erd-eo-bozz v3](https://github.com/yusnarsetiyadi/Backend-Alterra-Academy-Immersive-Dashboard-App/blob/main/erd-immersive-dashboard-app-project.jpg?raw=true)
 
 
 # Open API 
