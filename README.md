@@ -33,8 +33,8 @@ https://app.swaggerhub.com/apis-docs/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0
 9. [Gorm.io](https://gorm.io)
 10. [Code Clean Archiecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 11. [Postman](https://www.postman.com)
-15. [CloudFlare](https://www.cloudflare.com)
-16. [Visual Studio Code](https://code.visualstudio.com)
+12. [CloudFlare](https://www.cloudflare.com)
+13. [Visual Studio Code](https://code.visualstudio.com)
 
 # Try it!
 
@@ -48,11 +48,11 @@ Try our program by:
 
 - Clone this repository:
 ```
-git clone https://github.com/Alta-Capstone-Grup2/BE-API-EO-Bozz-capstone-alta1.git
+git clone https://github.com/yusnarsetiyadi/Backend-Alterra-Academy-Immersive-Dashboard-App.git
 ```
-- Move to the BE-API-EO-Bozz-capstone-alta1 folder
+- Move to the Backend-Alterra-Academy-Immersive-Dashboard-App folder
 ```
-cd BE-API-EO-Bozz-capstone-alta1/
+cd Backend-Alterra-Academy-Immersive-Dashboard-App/
 ```
 
 # Backend Contributors
